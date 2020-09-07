@@ -8,6 +8,7 @@ public class CsudhPlannerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CsudhPlannerApplication.class, args);
+
 	}
 
 }
