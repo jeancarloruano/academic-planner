@@ -30,12 +30,28 @@ public class FakPersonDataAccessService implements personDao {
     }
 
     @Override
-    public int deletePersoonById(UUID id) {
-        return 0;
+    public int deletePersonById(UUID id) {
+        Optional<Person> personMaybe = selectPersonById(id);
+        if(personMaybe.isEmpty()){
+            return 0;
+        }
+        else {
+            DB.remove(personMaybe.get());
+            return 1;
+        }
     }
 
     @Override
     public int updatePersonById(UUID id, Person person) {
-        return 0;
+         selectPersonById(id)
+                .map(person1 -> {
+                    int indexOfPerson = DB.indexOf(person1);
+                    if(indexOfPerson >= 0){
+                        DB.set(indexOfPerson, new Person(id,person.getName()));
+                                return 1;
+                    }
+                    return 0;
+                });
+                return 2;
     }
 }
