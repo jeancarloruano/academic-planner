@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang = "en">
+<html>
+	<head>
+		<title>My Planner</title>
+		<link rel = "stylesheet" href = "style.css">
+	</head>
+	<body>
+		<div class = "main">
+				<div class = "nav-banner">
+					<nav>
+						<div class = "logo">
+							<img src = "images/csudhlogo.png" alt = "CSUDH Logo">
+						</div>
+						<div class = "nav-links">
+							<ul>
+								<li><a href = "#">Home</a></li>
+								<li><a href = "#">Classes</a></li>
+								<li><a href = "#">My Progress</a></li>
+								<li><a href = "#">My Account</a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>			
+		</div>
+		<h1>Graduation Progress</h1>
+		<progress max = "3000" value = "0"></progress>
+			<script>
+					setInterval(()=> {
+						document.getElementsByTagName('progress')[0].value
+						= document.getElementsByTagName('progress')[0].value + 1
+						}, 0.0000000001)				
+			</script>
+
+		<h2>My Classes</h2>
+		<table>
+			<tr>
+				<th>Courses</th>
+				<th>Grade</th>
+				<th>Units</th>
+				<th>Semester</th>
+			</tr>
+			<tr>
+				<td>Compiler Construction</td>
+				<td>B-</td>
+				<td>4</td>
+				<td>Spring 19</td>
+			</tr>
+			<tr>
+				<td>Dynamic Web Development</td>
+				<td>A</td>
+				<td>4</td>
+				<td>Spring 19</td>
+			</tr>
+			<tr>
+				<td>Artificial Intelligence</td>
+				<td>C</td>
+				<td>3</td>
+				<td>Spring 19</td>
+			</tr>
+			<tr>
+				<td>Java 2</td>
+				<td>B</td>
+				<td>4</td>
+				<td>Fall 19</td>
+			</tr>
+			<tr>
+				<td>Data Structures</td>
+				<td>A</td>
+				<td>4</td>
+				<td>Fall 19</td>
+			</tr>
+			<tr>
+				<td>Discrete Mathematics</td>
+				<td>B-</td>
+				<td>3</td>
+				<td>Fall 19</td>
+			</tr>
+		</table>
+	</body>
+</html>
