@@ -21,6 +21,10 @@ public class PersonController {
         this.personService = personService;
     }
 
+
+    //Types of request methods for the database
+    //Methods will be moved through the files in a similar fashion.
+
     @PostMapping
     public void addPerson(@NonNull@RequestBody Person person){
         personService.addPerson(person);

@@ -20,6 +20,8 @@ public class PersonService {
         this.personDao = personDao;
     }
 
+    //Repeating Methods to return back to the front end
+
     public int addPerson(Person person){
         return personDao.insertPerson(person);
     }
