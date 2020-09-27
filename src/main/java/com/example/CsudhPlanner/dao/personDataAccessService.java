@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("postgres")
 public class personDataAccessService implements personDao {
@@ -19,31 +18,40 @@ public class personDataAccessService implements personDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /*
     @Override
-    public int insertPerson(UUID id, Person person) {
+    public int insertPerson(int id, Person person) {
         return 0;
     }
+*/
 
+    @Override
+    public int insertPerson(Person person) {
+        String sql = "Insert INTO person (id, name) VALUES (" + person.getId() +",'" + person.getName() +"')";
+        return jdbcTemplate.update(sql);
+    }
 
     //Method to format people from the postgres database to the person class (UUID , name) and return them as a list
     @Override
     public List<Person> selectAllPeople() {
         final String sql = "SELECT id, name FROM person";
         return jdbcTemplate.query(sql,(resultSet , i) -> {
-            UUID id = UUID.fromString(resultSet.getString("id"));
+            int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
-            return new Person(id, name);
+            return new Person(
+                    id,
+                    name);
         });
     }
 
     @Override
-    public Optional<Person> selectPersonById(UUID id) {
+    public Optional<Person> selectPersonById(int id) {
         final String sql = "SELECT id, name FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{id},
                 (resultSet , i) -> {
-                    UUID personId = UUID.fromString(resultSet.getString("id"));
+                    int personId = resultSet.getInt("id");
                     String name = resultSet.getString("name");
                     return new Person(personId, name);
                 });
@@ -52,12 +60,13 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public int deletePersonById(UUID id) {
-        return 0;
+    public int deletePersonById(int id) {
+        String sql = "DELETE FROM person WHERE id = " + id;
+        return jdbcTemplate.update(sql);
     }
 
     @Override
-    public int updatePersonById(UUID id, Person person) {
+    public int updatePersonById(int id, Person person) {
         return 0;
     }
 }
