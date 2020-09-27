@@ -11,11 +11,13 @@ public class Person {
 
     @NonNull
     private final String name;
+    private final String email;
 
     public Person(@JsonProperty("id") int id,
                   @NonNull @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
+        this.email = "test@csudh.edu";
     }
 
 
@@ -26,5 +28,9 @@ public class Person {
     @NonNull
     public String getName(){
         return name;
+    }
+
+    public String getEmail(){
+        return email;
     }
 }
