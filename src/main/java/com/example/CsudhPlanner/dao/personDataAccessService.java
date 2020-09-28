@@ -1,5 +1,6 @@
 package com.example.CsudhPlanner.dao;
 
+import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,12 +19,6 @@ public class personDataAccessService implements personDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    /*
-    @Override
-    public int insertPerson(int id, Person person) {
-        return 0;
-    }
-*/
 
     @Override
     public int insertPerson(Person person) {
@@ -67,6 +62,42 @@ public class personDataAccessService implements personDao {
 
     @Override
     public int updatePersonById(int id, Person person) {
+        return 0;
+    }
+
+
+    @Override
+    public int insertCourse(Course course) {
+        String sql = "Insert INTO courses (number, name, description) VALUES (" + course.getNumber() +",'" + course.getName() +"','" + course.getDescription() + "')";
+        return jdbcTemplate.update(sql);
+    }
+
+    @Override
+    public List<Course> selectAllCourses(){
+        final String sql = "SELECT number, name, description FROM courses";
+        return jdbcTemplate.query(sql,(resultSet , i) -> {
+            int number = resultSet.getInt("number");
+            String name = resultSet.getString("name");
+            String description = resultSet.getString("description");
+            return new Course(
+                    number,
+                    name,
+                    description);
+        });
+    }
+
+    @Override
+    public Optional<Course> selectCourseById(int id){
+        return null;
+    }
+
+    @Override
+    public int deleteCourseById(int id){
+        return 0;
+    }
+
+    @Override
+    public int updateCourseById(int number, Course course) {
         return 0;
     }
 }

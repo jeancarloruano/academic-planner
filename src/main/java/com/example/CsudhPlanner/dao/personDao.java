@@ -1,18 +1,14 @@
 package com.example.CsudhPlanner.dao;
 
+import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import java.util.List;
 import java.util.Optional;
-import java.lang.Math;
 
 
 public interface personDao {
 
-    //Inserst person into database with a set UUID
 
-
-
-    //Inserst person into data base with a random UUID
     int insertPerson(Person person);
 
     List<Person> selectAllPeople();
@@ -23,5 +19,18 @@ public interface personDao {
     int deletePersonById(int id);
 
     int updatePersonById(int id, Person person);
+
+
+
+    int insertCourse(Course course);
+
+    List<Course> selectAllCourses();
+
+
+    Optional<Course> selectCourseById(int id);
+
+    int deleteCourseById(int number);
+
+    int updateCourseById(int number, Course course);
 
 }
