@@ -30,13 +30,13 @@ public class PersonService {
         return personDao.selectAllPeople();
     }
 
-    public Optional<Person> getPersonById(int id){
+    public Optional<Person> getPersonById(Integer id){
         return personDao.selectPersonById(id);
     }
 
-    public int deletePersonById(int id){return personDao.deletePersonById(id);}
+    public Integer deletePersonById(int id){return personDao.deletePersonById(id);}
 
-    public int updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
+    public Integer updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
 
 
 }

@@ -4,6 +4,7 @@ package com.example.CsudhPlanner.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.lang.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
@@ -13,15 +14,27 @@ public class Course {
     @NonNull
     private final String name;
     private final String description;
-    private final List<Course> dependentCources;
+    private final ArrayList<Integer> prerequisites;
 
+    //For adding new courses
+    /*
     public Course(@JsonProperty("number") int number,
                   @NonNull @JsonProperty("name") String name,
                   @JsonProperty("description") String description) {
         this.number = number;
         this.name = name;
         this.description = description;
-        this.dependentCources = null;
+        this.prerequisites = null;
+    }
+*/
+    public Course(@NonNull@JsonProperty("number") int number,
+                  @NonNull @JsonProperty("name") String name,
+                  @JsonProperty("description") String description,
+                  @JsonProperty("prerequisites") ArrayList<Integer> prerequistes) {
+        this.number = number;
+        this.name = name;
+        this.description = description;
+        this.prerequisites = prerequistes;
     }
 
 
@@ -38,7 +51,7 @@ public class Course {
         return description;
     }
 
-    public List<Course> getDependencies(){
-        return dependentCources;
+    public ArrayList<Integer> getPrerequistes(){
+        return prerequisites;
     }
 }

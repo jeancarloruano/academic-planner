@@ -8,26 +8,21 @@ import java.util.Optional;
 
 public interface personDao {
 
-
     int insertPerson(Person person);
 
     List<Person> selectAllPeople();
 
-
-    Optional<Person> selectPersonById(int id);
+    Optional<Person> selectPersonById(Integer id);
 
     int deletePersonById(int id);
 
     int updatePersonById(int id, Person person);
 
-
-
     int insertCourse(Course course);
 
     List<Course> selectAllCourses();
 
-
-    Optional<Course> selectCourseById(int id);
+    Optional<Course> selectCourseById(Integer id);
 
     int deleteCourseById(int number);
 
