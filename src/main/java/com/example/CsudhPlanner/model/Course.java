@@ -16,17 +16,7 @@ public class Course {
     private final String description;
     private final ArrayList<Integer> prerequisites;
 
-    //For adding new courses
-    /*
-    public Course(@JsonProperty("number") int number,
-                  @NonNull @JsonProperty("name") String name,
-                  @JsonProperty("description") String description) {
-        this.number = number;
-        this.name = name;
-        this.description = description;
-        this.prerequisites = null;
-    }
-*/
+
     public Course(@NonNull@JsonProperty("number") int number,
                   @NonNull @JsonProperty("name") String name,
                   @JsonProperty("description") String description,

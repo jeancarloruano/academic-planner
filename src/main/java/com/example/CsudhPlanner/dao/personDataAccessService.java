@@ -171,7 +171,7 @@ public class personDataAccessService implements personDao {
     public int updateCourseById(int number, Course course) {
         String sql = "UPDATE courses " +
                 "SET prerequisites =  '"  + createSqlArray(course.getPrerequistes()) +
-                "' WHERE id = " + number;
+                "' WHERE number = " + number;
 
         jdbcTemplate.update(sql);
         return 0;
