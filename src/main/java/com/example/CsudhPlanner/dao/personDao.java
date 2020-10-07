@@ -1,29 +1,31 @@
 package com.example.CsudhPlanner.dao;
 
+import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 public interface personDao {
 
-    //Inserst person into database with a set UUID
-    int insertPerson(UUID id, Person person);
-
-
-    //Inserst person into data base with a random UUID
-    default int insertPerson(Person person) {
-        UUID id = UUID.randomUUID();
-        return insertPerson(id,person);
-    }
+    int insertPerson(Person person);
 
     List<Person> selectAllPeople();
 
+    Optional<Person> selectPersonById(Integer id);
 
-    Optional<Person> selectPersonById(UUID id);
+    int deletePersonById(int id);
 
-    int deletePersonById(UUID id);
+    int updatePersonById(int id, Person person);
 
-    int updatePersonById(UUID id, Person person);
+    int insertCourse(Course course);
+
+    List<Course> selectAllCourses();
+
+    Optional<Course> selectCourseById(Integer id);
+
+    int deleteCourseById(int number);
+
+    int updateCourseById(int number, Course course);
 
 }
