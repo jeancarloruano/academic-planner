@@ -4,49 +4,50 @@ import axios from 'axios';
 
 class UserList extends Component {
     state = {
-        users: [],
+        users : []
     };
 
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/users', { params: { name: 'Ervin Howell' } })
-            .then(response => {
-                this.setState({ users: response.data });
+        fetch(`http://localhost:8080/api/v1/course`)
+            .then(results => results.json())
+            .then(json => {
+                this.setState({
+                    users:json
+                })
             });
+        
     }
 
-    axiosTest() {
-        return axios.get('https://jsonplaceholder.typicode.com/users').then(response => response.data)
-        //use console.log() in order to test this func
-    }
-
-    setUserParam() {
-        const name = this.axiosTest();
-        console.log(name);
-        //for testing purposes...
+    renderTableData(){
+        return this.state.users.map((user,index) => {
+        const { number, name, description, prerequisites } = user //destructuring
+         return (
+            <tr key={number}>
+                <td>{number}</td>
+               <td>{name}</td>
+               <td>{description}</td>
+               <td>{prerequisites}</td>
+            </tr>
+         )
+        })
     }
 
     render() {
         return (
             <div>
-                <th>ID:</th>
-                <ul>
-                    {this.state.users.map(user => <div>{user.id}</div>)}
-                </ul>
-                <th>Username:</th>
-                <ul>
-                    {this.state.users.map(user => <div>{user.username}</div>)}
-                </ul>
-                <th>email:</th>
-                <ul>
-                    {this.state.users.map(user => <div>{user.email}</div>)}
-                </ul>
-                <th>Student Name:</th>
-                <ul>
-                    {this.state.users.map(user => <div>{user.name}</div>)}
-                </ul>
-            </div>
+            <h1 id='title'>CSUDH Courses</h1>
+            <table id='students'>
+               <tbody>
+                  {this.renderTableData()}
+               </tbody>
+            </table>
+         </div>
         );
     }
+}
+
+const RenderRow = (props) => {
+
 }
 export default UserList;
 

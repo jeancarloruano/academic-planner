@@ -63,7 +63,6 @@ Insert INTO courses (number, name, description, prerequisites)
     VALUES (331,'Computer Organization','Structure of the modern digital computer. Introduction to Boolean algebra and design of digital circuits. Arithmetic, control, storage and input/output systems.'
     ,'{221,281}');
 
-
 Insert INTO courses (number, name, description, prerequisites)
     VALUES (341,'Operating Systems','Overall structure of batch and time-shared operating systems. Scheduling of jobs, CPU and I/O devices. Paged and segmented memory management. I/O programming and file handling. Synchronization of concurrent processes.'
     ,'{311,331,3210}');
@@ -91,3 +90,11 @@ Insert INTO courses (number, name, description, prerequisites)
 Insert INTO courses (number, name, description, prerequisites)
     VALUES (471,'Compiler Construction 1','Introduction to the theory and practice of compiler construction. Overall structure of compilers. Lexical and syntactic analysis, code generation for block structured languages and code optimization'
     ,'{221,311}');
+
+Insert INTO courses (number, name, description, prerequisites)
+    VALUES (300,'Upper Division Elective','Student needs to choose from a list an elective'
+    ,'{311}');
+
+Insert INTO courses (number, name, description, prerequisites)
+    VALUES (302,'Lower Division Elective','Student needs to choose from a list an elective'
+    ,'{311}');
