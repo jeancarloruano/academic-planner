@@ -20,7 +20,7 @@ public interface personDao {
 
     int updatePersonById(int id, Person person);
 
-    ArrayList<Integer> getPersonsNeededCourseList(String name, Person person);
+    List<Course> NeededCourseList(int id,String name, Person person);
 
     int insertCourse(Course course);
 

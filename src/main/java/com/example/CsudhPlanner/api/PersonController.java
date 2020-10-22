@@ -52,9 +52,9 @@ public class PersonController {
         personService.updatePerson(id, personToUpdate);
     }
 
-    @GetMapping(path = "{name}")
-    public void getPersonNeededCourseList(@PathVariable("name")String name, @NonNull @RequestBody Person person){
-        personService.getPersonsNeededCourseList(name,person);
+    @GetMapping(path = "{id/name}")
+    public void NeededCourseList(@PathVariable("id")int id,String name, @NonNull @RequestBody Person person){
+        personService.NeededCourseList(id,name,person);
     }
 
 }

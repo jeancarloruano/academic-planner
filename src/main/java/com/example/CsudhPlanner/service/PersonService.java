@@ -1,6 +1,7 @@
 package com.example.CsudhPlanner.service;
 
 import com.example.CsudhPlanner.dao.personDao;
+import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,7 +40,7 @@ public class PersonService {
 
     public Integer updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
 
-    public ArrayList<Integer> getPersonsNeededCourseList(String name, Person person){return personDao.getPersonsNeededCourseList(name,person);}
+    public List<Course> NeededCourseList(int id,String name, Person person){return personDao.NeededCourseList(id,name,person);}
 
 
 }
