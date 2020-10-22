@@ -4,6 +4,7 @@ import com.example.CsudhPlanner.model.Person;
 import com.example.CsudhPlanner.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,11 @@ public class PersonController {
     @PutMapping(path = "{id}")
     public void updatePerson(@PathVariable("id") int id ,@NonNull @RequestBody Person personToUpdate){
         personService.updatePerson(id, personToUpdate);
+    }
+
+    @GetMapping(path = "{name}")
+    public void getPersonNeededCourseList(@PathVariable("name")String name, @NonNull @RequestBody Person person){
+        personService.getPersonsNeededCourseList(name,person);
     }
 
 }

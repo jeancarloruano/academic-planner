@@ -42,6 +42,12 @@ public class testDataBase implements personDao {
     }
 
     @Override
+    public ArrayList<Integer> getPersonsNeededCourseList(String name, Person person) {
+        ArrayList<Integer> test = new ArrayList<>();
+        return test;
+    }
+
+    @Override
     public int insertCourse(Course course) {
         return 0;
     }

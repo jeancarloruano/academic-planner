@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,8 @@ public class PersonService {
     public Integer deletePersonById(int id){return personDao.deletePersonById(id);}
 
     public Integer updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
+
+    public ArrayList<Integer> getPersonsNeededCourseList(String name, Person person){return personDao.getPersonsNeededCourseList(name,person);}
 
 
 }

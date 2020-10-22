@@ -110,6 +110,22 @@ public class personDataAccessService implements personDao {
         return 0;
     }
 
+    @Override
+    public ArrayList<Integer> getPersonsNeededCourseList(String name, Person person){
+        String sql = "SELECT completedCourses FROM person WHERE name = ?";
+        Array comCourses = (Array) jdbcTemplate.query(sql,(resultSet , i) -> {
+            ArrayList<Integer> test = createArrayList(resultSet.getArray("prerequisites"));
+            return test;
+        });
+
+        ArrayList<Integer> CC = createArrayList(comCourses);
+
+
+
+        return CC;
+
+    }
+
 
     //Course Methods
     @Override

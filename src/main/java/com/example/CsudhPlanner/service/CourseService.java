@@ -3,6 +3,7 @@ package com.example.CsudhPlanner.service;
 
 import com.example.CsudhPlanner.dao.personDao;
 import com.example.CsudhPlanner.model.Course;
+import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,5 @@ public class CourseService {
     public int deleteCourseById(int id){return personDao.deleteCourseById(id);}
 
     public int updateCourse(int id, Course newCourse){return personDao.updateCourseById(id,newCourse);}
-
 
 }

@@ -2,6 +2,8 @@ package com.example.CsudhPlanner.dao;
 
 import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ public interface personDao {
     int deletePersonById(int id);
 
     int updatePersonById(int id, Person person);
+
+    ArrayList<Integer> getPersonsNeededCourseList(String name, Person person);
 
     int insertCourse(Course course);
 
