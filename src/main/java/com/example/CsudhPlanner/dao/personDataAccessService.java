@@ -117,6 +117,7 @@ public class personDataAccessService implements personDao {
         return new ArrayList<>();
     }
 
+    //Does not include Prerequisite specification
     @Override
     public ArrayList<ArrayList<Course>> standardPlan(){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
@@ -125,13 +126,64 @@ public class personDataAccessService implements personDao {
 
         ArrayList<Course> temp = new ArrayList<>();
         int tally = 0;
-
         for(Course c : allCourses2){
+            if(tally > 10){
+                plan1.add(temp);
+                temp = new ArrayList<>();
+                tally = 0;
+            }
+
             temp.add(c);
+            tally += c.getCredits();
         }
-        plan1.add(temp);
         return plan1;
     }
+
+
+    //Does not include Prerequisite specification
+    @Override
+    public ArrayList<ArrayList<Course>> acceleratedPlan(){
+        ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
+        List<Course> allCourses = selectAllCourses();
+        ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
+
+        ArrayList<Course> temp = new ArrayList<>();
+        int tally = 0;
+        for(Course c : allCourses2){
+            if(tally > 13){
+                plan1.add(temp);
+                temp = new ArrayList<>();
+                tally = 0;
+            }
+
+            temp.add(c);
+            tally += c.getCredits();
+        }
+        return plan1;
+    }
+
+    //Does not include Prerequisite specification
+    @Override
+    public ArrayList<ArrayList<Course>> partTimePlan(){
+        ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
+        List<Course> allCourses = selectAllCourses();
+        ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
+
+        ArrayList<Course> temp = new ArrayList<>();
+        int tally = 0;
+        for(Course c : allCourses2){
+            if(tally > 3){
+                plan1.add(temp);
+                temp = new ArrayList<>();
+                tally = 0;
+            }
+
+            temp.add(c);
+            tally += c.getCredits();
+        }
+        return plan1;
+    }
+
 
 
     //Course Methods
@@ -144,7 +196,6 @@ public class personDataAccessService implements personDao {
                 course.getDescription(),
                 createSqlArray(course.getPrerequistes()));
     }
-
 
     @Override
     public List<Course> selectAllCourses(){

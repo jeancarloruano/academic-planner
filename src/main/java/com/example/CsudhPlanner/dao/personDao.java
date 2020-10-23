@@ -24,6 +24,10 @@ public interface personDao {
 
     ArrayList<ArrayList<Course>> standardPlan();
 
+    ArrayList<ArrayList<Course>> acceleratedPlan();
+
+    public ArrayList<ArrayList<Course>> partTimePlan();
+
 
 
 
