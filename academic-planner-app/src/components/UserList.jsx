@@ -45,9 +45,6 @@ class UserList extends Component {
     }
 }
 
-const RenderRow = (props) => {
-
-}
 export default UserList;
 
 console.log(UserList.render);

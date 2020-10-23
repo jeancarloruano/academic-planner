@@ -3,6 +3,7 @@ import "./App.css";
 import fire from './fire';
 import Login from './components/Login';
 import Hero from './components/Hero';
+import CreateUser from './components/CreateUser.jsx'
 
 function App() {
   const [user, setUser] = useState('');
@@ -97,6 +98,7 @@ function App() {
             passwordError={passwordError}
           />
         )}
+      <CreateUser />
 
     </div>
   );
