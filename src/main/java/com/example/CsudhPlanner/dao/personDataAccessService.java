@@ -25,12 +25,13 @@ public class personDataAccessService implements personDao {
     // People Methods
     @Override
     public int insertPerson(Person person) {
-        String sql = "Insert INTO person (id, name, email, completedCourses) VALUES (?,?,?,?)";
+        String sql = "Insert INTO person (id, name, email, completedCourses,password) VALUES (?,?,?,?,?)";
         return jdbcTemplate.update(sql,
                 person.getId(),
                 person.getName(),
                 person.getEmail(),
-                createSqlArray(person.getCompletedCourses()));
+                createSqlArray(person.getCompletedCourses()),
+                person.getPassword());
     }
 
     @Override

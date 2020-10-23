@@ -47,6 +47,8 @@ public class Person {
         return email;
     }
 
+    public String getPassword(){ return password;}
+
     @NonNull
     public ArrayList<Integer> getCompletedCourses(){
         return completedCourses;
