@@ -2,7 +2,8 @@ CREATE TABLE person(
     id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100),
-    completedCourses int[]
+    completedCourses int[],
+    password VARCHAR NOT NULL
 );
 CREATE TABLE courses(
     number INTEGER NOT NULL PRIMARY KEY,

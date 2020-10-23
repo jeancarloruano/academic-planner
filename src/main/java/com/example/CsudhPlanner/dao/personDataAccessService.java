@@ -41,12 +41,13 @@ public class personDataAccessService implements personDao {
             String name = resultSet.getString("name");
             String email = resultSet.getString("email");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
-
+            String password = resultSet.getString("password");
             return new Person(
                     id,
                     name,
                     email,
-                    test);
+                    test,
+                    password);
         });
     }
 
@@ -83,11 +84,13 @@ public class personDataAccessService implements personDao {
                     String name = resultSet.getString("name");
                     String email = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
+                    String password = resultSet.getString("password");
                     return new Person(
                             personId,
                             name,
                             email,
-                            test);
+                            test,
+                            password);
                 });
 
         return Optional.ofNullable(person);
@@ -112,10 +115,10 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public List<Course> NeededCourseList(int id,String name, Person person){
-        final String sql = "SELECT completedCourses FROM person WHERE id = " + id;
-        return new ArrayList<>();
+    public List<Course> NeededCourseList(int id, String name, Person person) {
+        return null;
     }
+
 
     //Does not include Prerequisite specification
     @Override

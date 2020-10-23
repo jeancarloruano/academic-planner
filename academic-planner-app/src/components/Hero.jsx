@@ -1,5 +1,5 @@
 import React from 'react';
-import UserList from '/Users/jeancarlo/Desktop/CsudhPlanner/academic-planner-app/src/components/UserList.jsx';
+import UserList from './UserList.jsx';
 
 const Hero = ({ HandleLogout }) => {
     return (
