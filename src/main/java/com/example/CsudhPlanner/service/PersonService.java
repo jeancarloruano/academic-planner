@@ -42,5 +42,7 @@ public class PersonService {
 
     public List<Course> NeededCourseList(int id,String name, Person person){return personDao.NeededCourseList(id,name,person);}
 
+    public ArrayList<ArrayList<Course>> standardPlan(){ return personDao.standardPlan();}
+
 
 }

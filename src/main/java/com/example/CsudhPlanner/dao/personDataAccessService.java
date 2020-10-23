@@ -4,6 +4,7 @@ import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Array;
@@ -112,26 +113,24 @@ public class personDataAccessService implements personDao {
 
     @Override
     public List<Course> NeededCourseList(int id,String name, Person person){
-        String sql = "SELECT completedCourses FROM person WHERE id = ?";
-        Array comCourses = (Array) jdbcTemplate.query(sql,(resultSet , i) -> {
-            ArrayList<Integer> test = createArrayList(resultSet.getArray("prerequisites"));
-            return test;
-        });
+        final String sql = "SELECT completedCourses FROM person WHERE id = " + id;
+        return new ArrayList<>();
+    }
 
-        ArrayList<Integer> CC = createArrayList(comCourses);
+    @Override
+    public ArrayList<ArrayList<Course>> standardPlan(){
+        ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
+        List<Course> allCourses = selectAllCourses();
+        ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
 
-        List<Course> courses = selectAllCourses();
-        int i = 0;
-        for(Course c : courses){
-            if(c.getNumber() == CC.get(i)){
-                courses.remove(c);
-            }
-            i++;
+        ArrayList<Course> temp = new ArrayList<>();
+        int tally = 0;
+
+        for(Course c : allCourses2){
+            temp.add(c);
         }
-
-
-        return courses;
-
+        plan1.add(temp);
+        return plan1;
     }
 
 
@@ -155,11 +154,13 @@ public class personDataAccessService implements personDao {
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("prerequisites"));
+            int credits = resultSet.getInt("credits");
             return new Course(
                     number,
                     name,
                     description,
-                    test);
+                    test,
+                    credits);
         });
     }
 
@@ -174,11 +175,13 @@ public class personDataAccessService implements personDao {
                     String name = resultSet.getString("name");
                     String description = resultSet.getString("description");
                     ArrayList<Integer> prerequisites = createArrayList(resultSet.getArray("prerequisites"));
+                    int credits = resultSet.getInt("credits");
                     return new Course(
                             courseID,
                             name,
                             description,
-                            prerequisites);
+                            prerequisites,
+                            credits);
                 });
 
         return Optional.ofNullable(course);

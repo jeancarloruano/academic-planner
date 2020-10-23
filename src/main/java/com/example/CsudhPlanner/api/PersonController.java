@@ -1,5 +1,6 @@
 package com.example.CsudhPlanner.api;
 
+import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import com.example.CsudhPlanner.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -52,9 +54,14 @@ public class PersonController {
         personService.updatePerson(id, personToUpdate);
     }
 
-    @GetMapping(path = "{id/name}")
+    @GetMapping(path = "{id}/courses")
     public void NeededCourseList(@PathVariable("id")int id,String name, @NonNull @RequestBody Person person){
         personService.NeededCourseList(id,name,person);
+    }
+
+    @GetMapping(path = "/standardPlan")
+    public ArrayList<ArrayList<Course>> standardPlan(){
+        return personService.standardPlan();
     }
 
 }

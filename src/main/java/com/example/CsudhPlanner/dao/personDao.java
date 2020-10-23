@@ -22,6 +22,11 @@ public interface personDao {
 
     List<Course> NeededCourseList(int id,String name, Person person);
 
+    ArrayList<ArrayList<Course>> standardPlan();
+
+
+
+
     int insertCourse(Course course);
 
     List<Course> selectAllCourses();

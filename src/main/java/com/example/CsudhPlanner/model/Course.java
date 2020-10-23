@@ -15,16 +15,19 @@ public class Course {
     private final String name;
     private final String description;
     private final ArrayList<Integer> prerequisites;
+    private final int credits;
 
 
     public Course(@NonNull@JsonProperty("number") int number,
                   @NonNull @JsonProperty("name") String name,
                   @JsonProperty("description") String description,
-                  @JsonProperty("prerequisites") ArrayList<Integer> prerequistes) {
+                  @JsonProperty("prerequisites") ArrayList<Integer> prerequistes,
+                  @JsonProperty("credits") int credits) {
         this.number = number;
         this.name = name;
         this.description = description;
         this.prerequisites = prerequistes;
+        this.credits = credits;
     }
 
 
@@ -44,4 +47,6 @@ public class Course {
     public ArrayList<Integer> getPrerequistes(){
         return prerequisites;
     }
+
+    public int getCredits(){return credits;}
 }
