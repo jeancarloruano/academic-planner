@@ -21,7 +21,7 @@ public class Person {
 
     public Person(@NonNull @JsonProperty("id") Integer id,
                   @NonNull @JsonProperty("name") String name,
-                  @JsonProperty("email") String email,
+                  @NonNull @JsonProperty("email") String email,
                   @NonNull @JsonProperty("completedCourses") ArrayList<Integer> completed,
                   @NonNull @JsonProperty("password") String password) {
 

@@ -5,8 +5,7 @@ class CreateUser extends Component {
         id: '',
         name: '',
         email: '',
-        completedCourses: [],
-        password : ''
+        completedCourses: []
     };
 
     componentDidMount() {
@@ -18,7 +17,7 @@ class CreateUser extends Component {
                 name: 'Johnathon Doe',
                 email: 'jonD42@toromail.csudh.edu',
                 completedCourses: [115, 255, 471],
-                password: "password"
+                password:"password"
             })
         };
         fetch('http://localhost:8080/api/v1/person/', requestOptions)

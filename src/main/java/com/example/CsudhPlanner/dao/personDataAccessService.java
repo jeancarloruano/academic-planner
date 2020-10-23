@@ -76,7 +76,7 @@ public class personDataAccessService implements personDao {
 
     @Override
     public Optional<Person> selectPersonById(Integer id) {
-        final String sql = "SELECT id,name,email,completedCourses FROM person WHERE id = ?";
+        final String sql = "SELECT id,name,email,completedCourses,password FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{id},
