@@ -64,4 +64,10 @@ public class PersonController {
         return personService.standardPlan();
     }
 
+    @GetMapping(path = "/acceleratedPlan")
+    public ArrayList<ArrayList<Course>> acceleratedPlan(){return personService.acceleratedPlan();}
+
+    @GetMapping(path = "/partTimePlan")
+    public ArrayList<ArrayList<Course>> partTimePlan(){return  personService.partTimePlan();}
+
 }

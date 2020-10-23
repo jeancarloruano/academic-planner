@@ -44,5 +44,8 @@ public class PersonService {
 
     public ArrayList<ArrayList<Course>> standardPlan(){ return personDao.standardPlan();}
 
+    public ArrayList<ArrayList<Course>> acceleratedPlan(){return personDao.acceleratedPlan();}
+
+    public ArrayList<ArrayList<Course>> partTimePlan(){return  personDao.partTimePlan();}
 
 }
