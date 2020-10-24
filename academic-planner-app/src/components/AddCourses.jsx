@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 
-class UserList extends Component {
+class AddCourses extends Component {
     state = {
-        users: []
+        courses: []
     };
 
     componentDidMount() {
@@ -11,15 +11,15 @@ class UserList extends Component {
             .then(results => results.json())
             .then(json => {
                 this.setState({
-                    users: json
+                    courses: json
                 })
             });
 
     }
 
     renderTableData() {
-        return this.state.users.map((user, index) => {
-            const { number, name, description, prerequisites } = user //destructuring
+        return this.state.courses.map((course, index) => {
+            const { number, name, description, prerequisites } = course //destructuring
             return (
                 <tr key={number}>
                     <td>{number}</td>
@@ -45,6 +45,4 @@ class UserList extends Component {
     }
 }
 
-export default UserList;
-
-console.log(UserList.render);
+export default AddCourses;

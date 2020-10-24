@@ -5,7 +5,8 @@ class CreateUser extends Component {
         id: '',
         name: '',
         email: '',
-        completedCourses: []
+        completedCourses: [],
+        password: ''
     };
 
     componentDidMount() {
@@ -13,11 +14,11 @@ class CreateUser extends Component {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: '12345',
-                name: 'Johnathon Doe',
-                email: 'jonD42@toromail.csudh.edu',
-                completedCourses: [115, 255, 471],
-                password:"password"
+                id: this.state.id,
+                name: this.state.name,
+                email: this.state.email,
+                completedCourses: this.state.completedCourses,
+                password: this.state.password
             })
         };
         fetch('http://localhost:8080/api/v1/person/', requestOptions)
