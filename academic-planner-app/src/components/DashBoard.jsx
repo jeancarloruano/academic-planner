@@ -8,9 +8,9 @@ function DashBoard(props) {
                 <button>Settings</button>
                 <button>Logout</button>
             </nav>
-            <body>
+            <div>
                 <h2>Welcome, User</h2>
-            </body>
+            </div>
         </section>
     )
 }

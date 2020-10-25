@@ -3,6 +3,8 @@ import "./App.css";
 import Login from './components/Login';
 import DashBoard from './components/DashBoard';
 import CreateUser from './components/CreateUser.jsx'
+import AddStudentInfo from "./components/AddStudentInfo";
+import AddCourses from "./components/AddCourses";
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +24,8 @@ class App extends Component {
     return (
       <div className="App">
         <Login />
+        <AddStudentInfo />
+        <AddCourses />
         <DashBoard />
       </div>
 

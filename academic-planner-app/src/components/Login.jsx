@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CheckEmail from './CheckEmail';
+import CreateUser from './CreateUser';
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -35,9 +36,9 @@ class Login extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        let emailExists = false;
+        let emailExists = true;
 
-        emailExists = CheckEmail.CheckEmail(this.state.email);
+        //emailExists = CheckEmail.CheckEmail(this.state.email);
 
         if (formValid(this.state.formError) && (emailExists === true)) {
             console.log(`
@@ -45,7 +46,10 @@ class Login extends Component {
             Email: ${this.state.email}
             Password: ${this.state.password}
             `)
-            console.log("Existing email: " + emailExists);
+            //console.log("Existing email: " + emailExists);
+            CreateUser.setEmail(this.state.email);
+            CreateUser.setPassword(this.state.password);
+
         } else {
             console.error('FORM INVALID -- DISPLAY ERROR MESSAGE')
             console.log("Existing email: " + emailExists);
@@ -111,7 +115,7 @@ class Login extends Component {
                         <div className="btnContainer">
                             <button onClick={this.handleLogin}>Sign In</button>
                         </div>
-
+                        <CreateUser />
                         {/*<div className="btnContainer">
                             {hasAccount ? (
                                 <>

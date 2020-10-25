@@ -1,23 +1,48 @@
 import React, { Component } from 'react';
 
 class CreateUser extends Component {
-    state = {
-        id: '',
-        name: '',
-        email: '',
-        completedCourses: [],
-        password: ''
-    };
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            id: '',
+            name: '',
+            email: '',
+            completedCourses: [],
+            password: ''
+        };
+    }
+
+
+    /*setID(id){
+        this.state.id = this.id;
+        console.log('ID: ' + this.state.id);
+    }*/
+
+    /*setName(name) {
+        this.state.name = this.name;
+        console.log('Name: ' + this.state.name);
+    }*/
+
+    setEmail(email) {
+        this.setState(email);
+        console.log('Email: ' + this.state.email);
+    }
+
+    setPassword(password) {
+        this.setState(password);
+        console.log('Password: ' + this.state.password);
+    }
 
     componentDidMount() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: this.state.id,
-                name: this.state.name,
+                id: '232467',
+                name: 'Bob Saget',
                 email: this.state.email,
-                completedCourses: this.state.completedCourses,
+                completedCourses: [115, 492, 301, 311],
                 password: this.state.password
             })
         };
@@ -27,7 +52,8 @@ class CreateUser extends Component {
 
     render() {
         return (
-            <div></div>
+            <div>
+            </div>
         );
     }
 }
