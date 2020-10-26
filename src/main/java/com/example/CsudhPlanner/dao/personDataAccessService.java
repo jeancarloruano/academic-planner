@@ -7,6 +7,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Repository;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.spec.KeySpec;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.*;
@@ -25,14 +32,16 @@ public class personDataAccessService implements personDao {
     // People Methods
     @Override
     public int insertPerson(Person person) {
-        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,password) VALUES (?,?,?,?,?,?)";
+        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,password,salt) VALUES (?,?,?,?,?,?,?)";
         return jdbcTemplate.update(sql,
                 person.getId(),
                 person.getFirstname(),
                 person.getLastname(),
                 person.getEmail(),
                 createSqlArray(person.getCompletedCourses()),
-                person.getPassword());
+                person.getPassword(),
+                person.getSalt(64)
+        );
     }
 
     @Override
@@ -192,6 +201,9 @@ public class personDataAccessService implements personDao {
         }
         return plan1;
     }
+
+
+
 
 
 
