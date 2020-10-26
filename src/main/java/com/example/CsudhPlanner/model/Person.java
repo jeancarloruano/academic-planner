@@ -11,7 +11,9 @@ public class Person {
     private final Integer id;
 
     @NonNull
-    private final String name;
+    private final String Firstname;
+    @NonNull
+    private final String LastName;
     private final String email;
     @NonNull
     private final ArrayList<Integer> completedCourses;
@@ -20,13 +22,15 @@ public class Person {
 
 
     public Person(@NonNull @JsonProperty("id") Integer id,
-                  @NonNull @JsonProperty("name") String name,
+                  @NonNull @JsonProperty("FirstName") String FirstName,
+                  @NonNull @JsonProperty("LastName") String LastName,
                   @NonNull @JsonProperty("email") String email,
                   @NonNull @JsonProperty("completedCourses") ArrayList<Integer> completed,
                   @NonNull @JsonProperty("password") String password) {
 
         this.id = id;
-        this.name = name;
+        this.Firstname = FirstName;
+        this.LastName = LastName;
         this.email = email;
         this.completedCourses = completed;
         this.password = password;
@@ -39,8 +43,13 @@ public class Person {
     }
 
     @NonNull
-    public String getName(){
-        return name;
+    public String getFirstname(){
+        return Firstname;
+    }
+
+    @NonNull
+    public String getLastname(){
+        return LastName;
     }
 
     public String getEmail(){

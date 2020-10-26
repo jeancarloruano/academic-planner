@@ -25,10 +25,11 @@ public class personDataAccessService implements personDao {
     // People Methods
     @Override
     public int insertPerson(Person person) {
-        String sql = "Insert INTO person (id, name, email, completedCourses,password) VALUES (?,?,?,?,?)";
+        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,password) VALUES (?,?,?,?,?,?)";
         return jdbcTemplate.update(sql,
                 person.getId(),
-                person.getName(),
+                person.getFirstname(),
+                person.getLastname(),
                 person.getEmail(),
                 createSqlArray(person.getCompletedCourses()),
                 person.getPassword());
@@ -39,13 +40,15 @@ public class personDataAccessService implements personDao {
         final String sql = "SELECT * FROM person";
         return jdbcTemplate.query(sql,(resultSet , i) -> {
             int id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
+            String FirstName = resultSet.getString("FirstName");
+            String LastName = resultSet.getString("LastName");
             String email = resultSet.getString("email");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
             String password = resultSet.getString("password");
             return new Person(
                     id,
-                    name,
+                    FirstName,
+                    LastName,
                     email,
                     test,
                     password);
@@ -76,19 +79,21 @@ public class personDataAccessService implements personDao {
 
     @Override
     public Optional<Person> selectPersonById(Integer id) {
-        final String sql = "SELECT id,name,email,completedCourses,password FROM person WHERE id = ?";
+        final String sql = "SELECT id,FirstName,LastName,email,completedCourses,password FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{id},
                 (resultSet , i) -> {
                     int personId = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
+                    String FirstName = resultSet.getString("FirstName");
+                    String LastName = resultSet.getString("LastName");
                     String email = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
                     String password = resultSet.getString("password");
                     return new Person(
                             personId,
-                            name,
+                            FirstName,
+                            LastName,
                             email,
                             test,
                             password);

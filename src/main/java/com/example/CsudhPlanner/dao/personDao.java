@@ -29,8 +29,6 @@ public interface personDao {
     public ArrayList<ArrayList<Course>> partTimePlan();
 
 
-
-
     int insertCourse(Course course);
 
     List<Course> selectAllCourses();
