@@ -39,8 +39,8 @@ public class personDataAccessService implements personDao {
                 person.getLastname(),
                 person.getEmail(),
                 createSqlArray(person.getCompletedCourses()),
-                person.getPassword(),
-                person.getSalt(64)
+                person.encrypt(person.getPassword(),person.returnSalt()),
+                person.returnSalt()
         );
     }
 
@@ -54,13 +54,15 @@ public class personDataAccessService implements personDao {
             String email = resultSet.getString("email");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
             String password = resultSet.getString("password");
+            String salt = resultSet.getString("salt");
             return new Person(
                     id,
                     FirstName,
                     LastName,
                     email,
                     test,
-                    password);
+                    password,
+                    salt);
         });
     }
 
@@ -88,7 +90,7 @@ public class personDataAccessService implements personDao {
 
     @Override
     public Optional<Person> selectPersonById(Integer id) {
-        final String sql = "SELECT id,FirstName,LastName,email,completedCourses,password FROM person WHERE id = ?";
+        final String sql = "SELECT id,FirstName,LastName,email,completedCourses,password,salt FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{id},
@@ -99,13 +101,15 @@ public class personDataAccessService implements personDao {
                     String email = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
                     String password = resultSet.getString("password");
+                    String salt = resultSet.getString("salt");
                     return new Person(
                             personId,
                             FirstName,
                             LastName,
                             email,
                             test,
-                            password);
+                            password,
+                            salt);
                 });
 
         return Optional.ofNullable(person);
@@ -205,14 +209,15 @@ public class personDataAccessService implements personDao {
 
     @Override
     public boolean checkPassword(int id,String password){
-        try {
-            Optional<Person> person = selectPersonById(id);
-            Person tempPerson = person.get();
-            String tempEncrypt = tempPerson.encrypt(password);
-            return tempEncrypt.equals(tempPerson.getPassword());
-        }catch(Exception e){
-            return false;
-        }
+
+        Optional<Person> person = selectPersonById(id);
+        Person storedUser = person.get();
+
+        String de = storedUser.decrypt(storedUser.getPassword(),storedUser.returnSalt());
+
+        return password.equals(de);
+
+
     }
 
 

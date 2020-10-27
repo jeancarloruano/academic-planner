@@ -34,7 +34,7 @@ public class Person {
     private final String password;
 
     @NonNull
-    private final String salt;
+    private final String salt; //Salts Need to be generated from front End
 
     private static final Random RANDOM = new SecureRandom();
 
@@ -44,16 +44,19 @@ public class Person {
                   @NonNull @JsonProperty("LastName") String LastName,
                   @NonNull @JsonProperty("email") String email,
                   @NonNull @JsonProperty("completedCourses") ArrayList<Integer> completed,
-                  @NonNull @JsonProperty("password") String password) {
+                  @NonNull @JsonProperty("password") String password,
+                  @NonNull @JsonProperty("salt") String salt) {
 
         this.id = id;
         this.Firstname = FirstName;
         this.LastName = LastName;
         this.email = email;
         this.completedCourses = completed;
-        this.salt = getSalt(64);
-        this.password = encrypt(password);
+        this.password = password;
+        this.salt = salt;
     }
+
+
 
 
     @NonNull
@@ -77,6 +80,8 @@ public class Person {
 
     public String getPassword(){ return password;}
 
+    public String returnSalt(){ return salt;}
+
     @NonNull
     public ArrayList<Integer> getCompletedCourses(){
         return completedCourses;
@@ -84,8 +89,7 @@ public class Person {
 
 
 
-    //Methods to hold passwords in SQL database Securely
-    //Methods Referenced here: https://howtodoinjava.com/java/java-security/aes-256-encryption-decryption/
+    //Methods to hold passwords     //Methods Referenced here: https://howtodoinjava.com/java/java-security/aes-256-encryption-decryption/in SQL database Securely
 
     public String getSalt(int length){
         StringBuilder sb = new StringBuilder(length);
@@ -102,7 +106,7 @@ public class Person {
         return sb.toString();
     }
 
-    public String encrypt(String strToEncrypt)
+    public String encrypt(String strToEncrypt,String salt)
     {
         try
         {
@@ -110,7 +114,7 @@ public class Person {
             IvParameterSpec ivspec = new IvParameterSpec(iv);
 
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-            KeySpec spec = new PBEKeySpec(secrets.secretKey.toCharArray(), this.salt.getBytes(), 65536, 256);
+            KeySpec spec = new PBEKeySpec(secrets.secretKey.toCharArray(), salt.getBytes(), 65536, 256);
             SecretKey tmp = factory.generateSecret(spec);
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
 
@@ -125,19 +129,19 @@ public class Person {
         return null;
     }
 
-    public String decrypt(String strToDecrypt) {
+    public String decrypt(String strToDecrypt,String salt) {
         try
         {
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             IvParameterSpec ivspec = new IvParameterSpec(iv);
 
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-            KeySpec spec = new PBEKeySpec(secrets.secretKey.toCharArray(), this.salt.getBytes(), 65536, 256);
+            KeySpec spec = new PBEKeySpec(secrets.secretKey.toCharArray(), salt.getBytes(), 65536, 256);
             SecretKey tmp = factory.generateSecret(spec);
-            SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
+            SecretKeySpec secretKeyS = new SecretKeySpec(tmp.getEncoded(), "AES");
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
+            cipher.init(Cipher.DECRYPT_MODE, secretKeyS, ivspec);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         }
         catch (Exception e) {
