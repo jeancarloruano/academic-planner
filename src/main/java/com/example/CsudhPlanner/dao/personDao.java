@@ -26,8 +26,9 @@ public interface personDao {
 
     ArrayList<ArrayList<Course>> acceleratedPlan();
 
-    public ArrayList<ArrayList<Course>> partTimePlan();
+    ArrayList<ArrayList<Course>> partTimePlan();
 
+    boolean checkPassword(int id,String password);
 
     int insertCourse(Course course);
 

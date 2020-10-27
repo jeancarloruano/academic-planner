@@ -70,4 +70,7 @@ public class PersonController {
     @GetMapping(path = "/partTimePlan")
     public ArrayList<ArrayList<Course>> partTimePlan(){return  personService.partTimePlan();}
 
+    @GetMapping(path = "/checkPass/{id}/{password}")
+    public boolean checkPass(@PathVariable("id") int id,@PathVariable("password") String password){ return personService.checkPassword(id,password);}
+
 }

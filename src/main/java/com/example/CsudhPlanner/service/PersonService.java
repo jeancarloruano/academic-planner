@@ -48,4 +48,6 @@ public class PersonService {
 
     public ArrayList<ArrayList<Course>> partTimePlan(){return  personDao.partTimePlan();}
 
+    public boolean checkPassword(int id,String password){return  personDao.checkPassword(id,password);}
+
 }

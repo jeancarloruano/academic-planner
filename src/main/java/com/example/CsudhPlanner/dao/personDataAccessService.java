@@ -203,6 +203,18 @@ public class personDataAccessService implements personDao {
     }
 
 
+    @Override
+    public boolean checkPassword(int id,String password){
+        try {
+            Optional<Person> person = selectPersonById(id);
+            Person tempPerson = person.get();
+            String tempEncrypt = tempPerson.encrypt(password);
+            return tempEncrypt.equals(tempPerson.getPassword());
+        }catch(Exception e){
+            return false;
+        }
+    }
+
 
 
 
