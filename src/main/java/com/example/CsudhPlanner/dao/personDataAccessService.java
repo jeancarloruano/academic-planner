@@ -169,13 +169,6 @@ public class personDataAccessService implements personDao {
 
         Optional<Person> tempPerson = selectPersonById(id);
         Person person = tempPerson.get();
-        List<Course> personCourses = new ArrayList<>();
-
-        for(Integer i : person.getCompletedCourses()){
-            Optional<Course> temp = selectCourseById(i);
-            Course c = temp.get();
-            personCourses.add(c);
-        }
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
 
@@ -204,13 +197,6 @@ public class personDataAccessService implements personDao {
 
         Optional<Person> tempPerson = selectPersonById(id);
         Person person = tempPerson.get();
-        List<Course> personCourses = new ArrayList<>();
-
-        for(Integer i : person.getCompletedCourses()){
-            Optional<Course> temp = selectCourseById(i);
-            Course c = temp.get();
-            personCourses.add(c);
-        }
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
 
@@ -238,13 +224,7 @@ public class personDataAccessService implements personDao {
 
         Optional<Person> tempPerson = selectPersonById(id);
         Person person = tempPerson.get();
-        List<Course> personCourses = new ArrayList<>();
 
-        for(Integer i : person.getCompletedCourses()){
-            Optional<Course> temp = selectCourseById(i);
-            Course c = temp.get();
-            personCourses.add(c);
-        }
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
 
@@ -276,7 +256,6 @@ public class personDataAccessService implements personDao {
 
 
     }
-
 
 
 
