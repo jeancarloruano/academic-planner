@@ -16,19 +16,21 @@ public interface personDao {
 
     Optional<Person> selectPersonById(Integer id);
 
+    Optional<Person> selectPersonByEmail(String email);
+
     int deletePersonById(int id);
 
     int updatePersonById(int id, Person person);
 
     List<Course> NeededCourseList(int id,String name, Person person);
 
-    ArrayList<ArrayList<Course>> standardPlan();
+    ArrayList<ArrayList<Course>> standardPlan(int id);
 
-    ArrayList<ArrayList<Course>> acceleratedPlan();
+    ArrayList<ArrayList<Course>> acceleratedPlan(int id);
 
-    ArrayList<ArrayList<Course>> partTimePlan();
+    ArrayList<ArrayList<Course>> partTimePlan(int id);
 
-    boolean checkPassword(int id,String password);
+    boolean checkPassword(String email,String password);
 
     int insertCourse(Course course);
 

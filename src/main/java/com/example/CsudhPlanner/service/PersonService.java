@@ -6,6 +6,7 @@ import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,18 +37,22 @@ public class PersonService {
         return personDao.selectPersonById(id);
     }
 
+    public Optional<Person> getPersonByEmail(String email){
+        return personDao.selectPersonByEmail(email);
+    }
+
     public Integer deletePersonById(int id){return personDao.deletePersonById(id);}
 
     public Integer updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
 
     public List<Course> NeededCourseList(int id,String name, Person person){return personDao.NeededCourseList(id,name,person);}
 
-    public ArrayList<ArrayList<Course>> standardPlan(){ return personDao.standardPlan();}
+    public ArrayList<ArrayList<Course>> standardPlan(int id){ return personDao.standardPlan(id);}
 
-    public ArrayList<ArrayList<Course>> acceleratedPlan(){return personDao.acceleratedPlan();}
+    public ArrayList<ArrayList<Course>> acceleratedPlan(int id){return personDao.acceleratedPlan(id);}
 
-    public ArrayList<ArrayList<Course>> partTimePlan(){return  personDao.partTimePlan();}
+    public ArrayList<ArrayList<Course>> partTimePlan(int id){return  personDao.partTimePlan(id);}
 
-    public boolean checkPassword(int id,String password){return  personDao.checkPassword(id,password);}
+    public boolean checkPassword(String email,String password){return  personDao.checkPassword(email,password);}
 
 }

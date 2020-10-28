@@ -13,6 +13,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.text.html.Option;
 import java.security.spec.KeySpec;
 import java.sql.Array;
 import java.sql.SQLException;
@@ -116,6 +117,33 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
+    public Optional<Person> selectPersonByEmail(String email){
+        final String sql = "SELECT id,FirstName,LastName,email,completedCourses,password,salt FROM person WHERE email = ?";
+        Person person = jdbcTemplate.queryForObject(
+                sql,
+                new Object[]{email},
+                (resultSet , i) -> {
+                    int personId = resultSet.getInt("id");
+                    String FirstName = resultSet.getString("FirstName");
+                    String LastName = resultSet.getString("LastName");
+                    String emails = resultSet.getString("email");
+                    ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
+                    String password = resultSet.getString("password");
+                    String salt = resultSet.getString("salt");
+                    return new Person(
+                            personId,
+                            FirstName,
+                            LastName,
+                            emails,
+                            test,
+                            password,
+                            salt);
+                });
+
+        return Optional.ofNullable(person);
+    }
+
+    @Override
     public int deletePersonById(int id) {
         String sql = "DELETE FROM person WHERE id = " + id;
         return jdbcTemplate.update(sql);
@@ -141,10 +169,15 @@ public class personDataAccessService implements personDao {
 
     //Does not include Prerequisite specification
     @Override
-    public ArrayList<ArrayList<Course>> standardPlan(){
+    public ArrayList<ArrayList<Course>> standardPlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
+
+        Optional<Person> tempPerson = selectPersonById(id);
+        Person person = tempPerson.get();
+        List<Course> personCourses = new ArrayList<>();
+
 
         ArrayList<Course> temp = new ArrayList<>();
         int tally = 0;
@@ -164,7 +197,7 @@ public class personDataAccessService implements personDao {
 
     //Does not include Prerequisite specification
     @Override
-    public ArrayList<ArrayList<Course>> acceleratedPlan(){
+    public ArrayList<ArrayList<Course>> acceleratedPlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
@@ -186,7 +219,7 @@ public class personDataAccessService implements personDao {
 
     //Does not include Prerequisite specification
     @Override
-    public ArrayList<ArrayList<Course>> partTimePlan(){
+    public ArrayList<ArrayList<Course>> partTimePlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
@@ -208,9 +241,9 @@ public class personDataAccessService implements personDao {
 
 
     @Override
-    public boolean checkPassword(int id,String password){
+    public boolean checkPassword(String email,String password){
 
-        Optional<Person> person = selectPersonById(id);
+        Optional<Person> person = selectPersonByEmail(email);
         Person storedUser = person.get();
 
         String de = storedUser.decrypt(storedUser.getPassword(),storedUser.returnSalt());

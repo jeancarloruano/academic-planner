@@ -43,6 +43,11 @@ public class PersonController {
         return personService.getPersonById(id).orElse(null);
     }
 
+    @GetMapping(path = "/email/{email}")
+    public Person getPersonByEmail(@PathVariable("email") String email){
+        return personService.getPersonByEmail(email).orElse(null);
+    }
+
 
     @DeleteMapping(path = "{id}")
     public void deletePersonById(@PathVariable("id") int id){
@@ -54,23 +59,24 @@ public class PersonController {
         personService.updatePerson(id, personToUpdate);
     }
 
+    //In progress
     @GetMapping(path = "{id}/courses")
     public void NeededCourseList(@PathVariable("id")int id,String name, @NonNull @RequestBody Person person){
         personService.NeededCourseList(id,name,person);
     }
 
-    @GetMapping(path = "/standardPlan")
-    public ArrayList<ArrayList<Course>> standardPlan(){
-        return personService.standardPlan();
+    @GetMapping(path = "/{id}/standardPlan")
+    public ArrayList<ArrayList<Course>> standardPlan(@PathVariable("id") int id){
+        return personService.standardPlan(id);
     }
 
-    @GetMapping(path = "/acceleratedPlan")
-    public ArrayList<ArrayList<Course>> acceleratedPlan(){return personService.acceleratedPlan();}
+    @GetMapping(path = "/{id}/acceleratedPlan")
+    public ArrayList<ArrayList<Course>> acceleratedPlan(@PathVariable("id") int id){return personService.acceleratedPlan(id);}
 
-    @GetMapping(path = "/partTimePlan")
-    public ArrayList<ArrayList<Course>> partTimePlan(){return  personService.partTimePlan();}
+    @GetMapping(path = "/{id}/partTimePlan")
+    public ArrayList<ArrayList<Course>> partTimePlan(@PathVariable("id") int id){return  personService.partTimePlan(id);}
 
-    @GetMapping(path = "/checkPass/{id}/{password}")
-    public boolean checkPass(@PathVariable("id") int id,@PathVariable("password") String password){ return personService.checkPassword(id,password);}
+    @GetMapping(path = "/checkPass/{email}/{password}")
+    public boolean checkPass(@PathVariable("email") String email,@PathVariable("password") String password){ return personService.checkPassword(email,password);}
 
 }
