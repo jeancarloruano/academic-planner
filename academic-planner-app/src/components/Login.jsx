@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AddStudentInfo from './AddStudentInfo';
 import CheckEmail from './CheckEmail';
 import CreateUser from './CreateUser';
 
@@ -22,7 +23,8 @@ class Login extends Component {
 
         this.state = {
             id: '',
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             completedCourses: [],
             password: '',
@@ -37,18 +39,23 @@ class Login extends Component {
     handleSubmit = e => {
         e.preventDefault();
         let emailExists = true;
-
-        //emailExists = CheckEmail.CheckEmail(this.state.email);
+        let isValid = false;
 
         if (formValid(this.state.formError) && (emailExists === true)) {
             console.log(`
             --SUBMITTING--
             Email: ${this.state.email}
             Password: ${this.state.password}
-            `)
-            //console.log("Existing email: " + emailExists);
-            CreateUser.setEmail(this.state.email);
-            CreateUser.setPassword(this.state.password);
+            `);
+
+            isValid = true;
+
+            /*return (
+                <CreateUser
+                    email='{this.state.email}'
+                    password='{this.state.password}'
+                />
+            )*/
 
         } else {
             console.error('FORM INVALID -- DISPLAY ERROR MESSAGE')
@@ -84,10 +91,13 @@ class Login extends Component {
 
 
 
-
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <CreateUser
+                    email={this.state.email}
+                    password={this.state.password}
+                />
                 <section className="login" >
                     <div className="loginContainer">
                         <h2>CSUDH</h2>
@@ -115,20 +125,6 @@ class Login extends Component {
                         <div className="btnContainer">
                             <button onClick={this.handleLogin}>Sign In</button>
                         </div>
-                        <CreateUser />
-                        {/*<div className="btnContainer">
-                            {hasAccount ? (
-                                <>
-                                    <button onClick={handleLogin}>Sign In</button>
-                                    <p>Don't have an account ? <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span></p>
-                                </>
-                            ) : (
-                                    <>
-                                        <button onClick={handleSignUp}>Sign Up</button>
-                                        <p>Have an account ? <span onClick={() => setHasAccount(!hasAccount)}>Sign in</span></p>
-                                    </>
-                                )}
-                            </div>*/}
                     </div>
                 </section>
             </form>

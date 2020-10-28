@@ -24,21 +24,32 @@ class AddStudentInfo extends Component {
                 <section className="addInfo" >
                     <div className="formContainer">
                         <p>We noticed you've never been here before. Please fill out the following to continue.</p>
-                        <label htmlFor="id">Student ID</label>
+
+                        <label htmlFor="firstName">First Name</label>
                         <input
                             type="text"
-                            name="id"
-                            autoFocus
+                            name="firstName"
                             required
                             onChange={this.handleChange}
                         />
 
                         <p className="errorMsg">{this.state.formError.inputError}</p>
 
-                        <label htmlFor="name">Student Name</label>
+                        <label htmlFor="lastName">Last Name</label>
                         <input
                             type="text"
-                            name="name"
+                            name="lastName"
+                            required
+                            onChange={this.handleChange}
+                        />
+
+                        <p className="errorMsg">{this.state.formError.inputError}</p>
+
+                        <label htmlFor="id">Student ID</label>
+                        <input
+                            type="text"
+                            name="id"
+                            autoFocus
                             required
                             onChange={this.handleChange}
                         />

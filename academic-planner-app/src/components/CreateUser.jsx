@@ -1,49 +1,73 @@
 import React, { Component } from 'react';
 
+const RandomString = () => {
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()[]{}_=+-/?~';
+    let hashVal = '';
+    let i;
+
+    for (i = 0; i < 11; i++) {
+        hashVal += characters[Math.floor(Math.random() * (characters.length))];
+    }
+
+    console.log('Hash Salt Value: ' + hashVal);                  //for debugging, delete or comment out for security
+    return hashVal;
+}
+
+let myString = RandomString();
+
 class CreateUser extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             id: '',
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             completedCourses: [],
-            password: ''
+            password: '',
+            salt: ''
         };
     }
 
-
-    /*setID(id){
-        this.state.id = this.id;
-        console.log('ID: ' + this.state.id);
-    }*/
-
-    /*setName(name) {
-        this.state.name = this.name;
-        console.log('Name: ' + this.state.name);
-    }*/
-
-    setEmail(email) {
-        this.setState(email);
-        console.log('Email: ' + this.state.email);
+    SetProperties() {
+        this.setState(
+            {
+                id: '5673765',
+                firstName: 'Bob',
+                lastName: 'Saget',
+                email: 'this.props.email',
+                completedCourses: [115, 492, 301, 311],
+                password: 'this.props.password',
+                salt: myString
+            }, () => {
+                console.log('Callback Value: ',                         //for debugging only, delete or comment out for security
+                    'ID: ' + this.state.id,
+                    'First Name: ' + this.state.firstName,
+                    'Last Name: ' + this.state.lastName,
+                    'Email: ' + this.state.email,
+                    'Completed Courses: ' + this.state.completedCourses,
+                    'Password: ' + this.state.password,
+                    'Hash Salt Value: ' + this.state.salt
+                );
+            }
+        );
     }
 
-    setPassword(password) {
-        this.setState(password);
-        console.log('Password: ' + this.state.password);
-    }
 
     componentDidMount() {
+        this.SetProperties();
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: '232467',
-                name: 'Bob Saget',
+                id: this.state.id,
+                FirstName: this.state.firstName,
+                LastName: this.state.lastName,
                 email: this.state.email,
-                completedCourses: [115, 492, 301, 311],
-                password: this.state.password
+                completedCourses: this.state.completedCourses,
+                password: this.state.password,
+                salt: this.state.salt
             })
         };
         fetch('http://localhost:8080/api/v1/person/', requestOptions)
@@ -53,9 +77,12 @@ class CreateUser extends Component {
     render() {
         return (
             <div>
+                Hello World! <br />
+                {this.props.email}
+                {this.props.password}
             </div>
         );
     }
-}
 
+}
 export default CreateUser

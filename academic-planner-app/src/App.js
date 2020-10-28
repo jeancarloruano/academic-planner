@@ -7,26 +7,11 @@ import AddStudentInfo from "./components/AddStudentInfo";
 import AddCourses from "./components/AddCourses";
 
 class App extends Component {
-  constructor(props) {
-    super();
-    this.state = {};
-  }
-
-  state = {
-    id: '',
-    name: '',
-    email: '',
-    completedCourses: [],
-    password: ''
-  };
 
   render() {
     return (
       <div className="App">
         <Login />
-        <AddStudentInfo />
-        <AddCourses />
-        <DashBoard />
       </div>
 
     );
