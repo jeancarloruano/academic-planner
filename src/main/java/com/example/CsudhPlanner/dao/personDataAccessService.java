@@ -162,13 +162,6 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public List<Course> NeededCourseList(int id, String name, Person person) {
-        return null;
-    }
-
-
-    //Does not include Prerequisite specification
-    @Override
     public ArrayList<ArrayList<Course>> standardPlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
@@ -177,6 +170,14 @@ public class personDataAccessService implements personDao {
         Optional<Person> tempPerson = selectPersonById(id);
         Person person = tempPerson.get();
         List<Course> personCourses = new ArrayList<>();
+
+        for(Integer i : person.getCompletedCourses()){
+            Optional<Course> temp = selectCourseById(i);
+            Course c = temp.get();
+            personCourses.add(c);
+        }
+
+        allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
 
 
         ArrayList<Course> temp = new ArrayList<>();
@@ -195,12 +196,24 @@ public class personDataAccessService implements personDao {
     }
 
 
-    //Does not include Prerequisite specification
     @Override
     public ArrayList<ArrayList<Course>> acceleratedPlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
+
+        Optional<Person> tempPerson = selectPersonById(id);
+        Person person = tempPerson.get();
+        List<Course> personCourses = new ArrayList<>();
+
+        for(Integer i : person.getCompletedCourses()){
+            Optional<Course> temp = selectCourseById(i);
+            Course c = temp.get();
+            personCourses.add(c);
+        }
+
+        allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
+
 
         ArrayList<Course> temp = new ArrayList<>();
         int tally = 0;
@@ -217,12 +230,24 @@ public class personDataAccessService implements personDao {
         return plan1;
     }
 
-    //Does not include Prerequisite specification
     @Override
     public ArrayList<ArrayList<Course>> partTimePlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
+
+        Optional<Person> tempPerson = selectPersonById(id);
+        Person person = tempPerson.get();
+        List<Course> personCourses = new ArrayList<>();
+
+        for(Integer i : person.getCompletedCourses()){
+            Optional<Course> temp = selectCourseById(i);
+            Course c = temp.get();
+            personCourses.add(c);
+        }
+
+        allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
+
 
         ArrayList<Course> temp = new ArrayList<>();
         int tally = 0;
@@ -238,7 +263,6 @@ public class personDataAccessService implements personDao {
         }
         return plan1;
     }
-
 
     @Override
     public boolean checkPassword(String email,String password){

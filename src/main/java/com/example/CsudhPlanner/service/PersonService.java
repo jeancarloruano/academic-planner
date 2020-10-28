@@ -45,8 +45,6 @@ public class PersonService {
 
     public Integer updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
 
-    public List<Course> NeededCourseList(int id,String name, Person person){return personDao.NeededCourseList(id,name,person);}
-
     public ArrayList<ArrayList<Course>> standardPlan(int id){ return personDao.standardPlan(id);}
 
     public ArrayList<ArrayList<Course>> acceleratedPlan(int id){return personDao.acceleratedPlan(id);}

@@ -59,12 +59,6 @@ public class PersonController {
         personService.updatePerson(id, personToUpdate);
     }
 
-    //In progress
-    @GetMapping(path = "{id}/courses")
-    public void NeededCourseList(@PathVariable("id")int id,String name, @NonNull @RequestBody Person person){
-        personService.NeededCourseList(id,name,person);
-    }
-
     @GetMapping(path = "/{id}/standardPlan")
     public ArrayList<ArrayList<Course>> standardPlan(@PathVariable("id") int id){
         return personService.standardPlan(id);

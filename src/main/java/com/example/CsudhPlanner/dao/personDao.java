@@ -22,8 +22,6 @@ public interface personDao {
 
     int updatePersonById(int id, Person person);
 
-    List<Course> NeededCourseList(int id,String name, Person person);
-
     ArrayList<ArrayList<Course>> standardPlan(int id);
 
     ArrayList<ArrayList<Course>> acceleratedPlan(int id);
