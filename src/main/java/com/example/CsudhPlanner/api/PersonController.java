@@ -73,4 +73,7 @@ public class PersonController {
     @GetMapping(path = "/checkPass/{email}/{password}")
     public boolean checkPass(@PathVariable("email") String email,@PathVariable("password") String password){ return personService.checkPassword(email,password);}
 
+    @GetMapping(path = "/currentCourses/{id}")
+    public ArrayList<Integer> currentCourses(@PathVariable("id") int id){ return personService.currentCourses(id);}
+
 }

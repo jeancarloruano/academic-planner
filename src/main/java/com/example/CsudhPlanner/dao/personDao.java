@@ -30,6 +30,11 @@ public interface personDao {
 
     boolean checkPassword(String email,String password);
 
+    ArrayList<Integer> currentCourses(int id);
+
+
+
+
     int insertCourse(Course course);
 
     List<Course> selectAllCourses();

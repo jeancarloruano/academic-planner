@@ -53,4 +53,5 @@ public class PersonService {
 
     public boolean checkPassword(String email,String password){return  personDao.checkPassword(email,password);}
 
+    public ArrayList<Integer> currentCourses(int id){return personDao.currentCourses(id);}
 }

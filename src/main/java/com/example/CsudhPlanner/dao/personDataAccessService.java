@@ -4,17 +4,7 @@ import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Repository;
-
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.SecretKeySpec;
-import javax.swing.text.html.Option;
-import java.security.spec.KeySpec;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.*;
@@ -33,13 +23,14 @@ public class personDataAccessService implements personDao {
     // People Methods
     @Override
     public int insertPerson(Person person) {
-        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,password,salt) VALUES (?,?,?,?,?,?,?)";
+        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,currentCourses,password,salt) VALUES (?,?,?,?,?,?,?,?)";
         return jdbcTemplate.update(sql,
                 person.getId(),
                 person.getFirstname(),
                 person.getLastname(),
                 person.getEmail(),
                 createSqlArray(person.getCompletedCourses()),
+                createSqlArray(person.getCurrentCourses()),
                 person.encrypt(person.getPassword(),person.returnSalt()),
                 person.returnSalt()
         );
@@ -54,6 +45,7 @@ public class personDataAccessService implements personDao {
             String LastName = resultSet.getString("LastName");
             String email = resultSet.getString("email");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
+            ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
             String password = resultSet.getString("password");
             String salt = resultSet.getString("salt");
             return new Person(
@@ -62,6 +54,7 @@ public class personDataAccessService implements personDao {
                     LastName,
                     email,
                     test,
+                    current,
                     password,
                     salt);
         });
@@ -91,7 +84,7 @@ public class personDataAccessService implements personDao {
 
     @Override
     public Optional<Person> selectPersonById(Integer id) {
-        final String sql = "SELECT id,FirstName,LastName,email,completedCourses,password,salt FROM person WHERE id = ?";
+        final String sql = "SELECT * FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{id},
@@ -101,6 +94,7 @@ public class personDataAccessService implements personDao {
                     String LastName = resultSet.getString("LastName");
                     String email = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
+                    ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
                     String password = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
                     return new Person(
@@ -109,6 +103,7 @@ public class personDataAccessService implements personDao {
                             LastName,
                             email,
                             test,
+                            current,
                             password,
                             salt);
                 });
@@ -128,6 +123,7 @@ public class personDataAccessService implements personDao {
                     String LastName = resultSet.getString("LastName");
                     String emails = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
+                    ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
                     String password = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
                     return new Person(
@@ -136,6 +132,7 @@ public class personDataAccessService implements personDao {
                             LastName,
                             emails,
                             test,
+                            current,
                             password,
                             salt);
                 });
@@ -255,6 +252,13 @@ public class personDataAccessService implements personDao {
         return password.equals(de);
 
 
+    }
+
+    @Override
+    public ArrayList<Integer> currentCourses(int id){
+        Optional<Person> temp = selectPersonById(id);
+        Person temp2 = temp.get();
+        return temp2.getCurrentCourses();
     }
 
 

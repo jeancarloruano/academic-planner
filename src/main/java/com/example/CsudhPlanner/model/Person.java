@@ -30,6 +30,7 @@ public class Person {
     private final String email;
     @NonNull
     private final ArrayList<Integer> completedCourses;
+    private final ArrayList<Integer> currentCourses;
     @NonNull
     private final String password;
 
@@ -44,6 +45,7 @@ public class Person {
                   @NonNull @JsonProperty("LastName") String LastName,
                   @NonNull @JsonProperty("email") String email,
                   @NonNull @JsonProperty("completedCourses") ArrayList<Integer> completed,
+                  @JsonProperty("currentCourses") ArrayList<Integer> current,
                   @NonNull @JsonProperty("password") String password,
                   @NonNull @JsonProperty("salt") String salt) {
 
@@ -52,6 +54,7 @@ public class Person {
         this.LastName = LastName;
         this.email = email;
         this.completedCourses = completed;
+        this.currentCourses = current;
         this.password = password;
         this.salt = salt;
     }
@@ -86,6 +89,8 @@ public class Person {
     public ArrayList<Integer> getCompletedCourses(){
         return completedCourses;
     }
+
+    public ArrayList<Integer> getCurrentCourses(){return currentCourses;}
 
 
 
