@@ -113,7 +113,7 @@ public class personDataAccessService implements personDao {
 
     @Override
     public Optional<Person> selectPersonByEmail(String email){
-        final String sql = "SELECT id,FirstName,LastName,email,completedCourses,password,salt FROM person WHERE email = ?";
+        final String sql = "SELECT * FROM person WHERE email = ?";
         Person person = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{email},
