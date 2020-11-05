@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AddStudentInfo from './AddStudentInfo';
-import CheckEmail from './CheckEmail';
 import CreateUser from './CreateUser';
 
 const emailRegex = RegExp(

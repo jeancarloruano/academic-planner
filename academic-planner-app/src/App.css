@@ -28,6 +28,8 @@ ul {
   overflow: hidden;
 }
 
+/* styling for the Login component */
+
 .login {
   width: 100%;
   min-height: 100vh;
@@ -103,6 +105,8 @@ ul {
   color: red;
   font-size: 16px;
 }
+
+/* styling for the AddInfo component */
 
 .addInfo {
   width: 100%;
@@ -180,6 +184,8 @@ ul {
   font-size: 16px;
 }
 
+/* styling for the AddCourses component */
+
 .addCourses {
   width: 100%;
   background: #e9e9e9;
@@ -209,24 +215,54 @@ ul {
   justify-content: center;
 }
 
+/* styling for the DashBoard component */
+
 .dashboard {
   width: 100%;
   min-height: 100vh;
   background: #e9e9e9;
 }
 
-.dashboard nav {
+.dashboard header .navBar nav {
   background: #860038;
   width: 100%;
   padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  float: right;
 }
 
-.dashboard body {
-  color: #fff;
-  background: #e9e9e9;
+.dashboard header .navBar nav .logo {
+  max-width:20%;
+  max-height:20%;
+  float: left;
+}
+
+.dashboard header .navBar nav .logo:hover {
+  background-color: #00000023;
+}
+
+.dashboard header .navBar nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dashboard header .navBar nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding: 25px;
+}
+
+.dashboard header .navBar nav .avatar {
+  max-width: 5%;
+  max-height: 5%;
+  float: right;
+}
+
+.dashboard header .navBar nav .avatar:hover {
+  background-color: #00000023;
 }
 
 .dashboard nav button {
@@ -237,4 +273,65 @@ ul {
 
 .dashboard nav button:hover {
   color: #EFBA08;
+}
+
+.dashboard .greeting {
+  width: 50%;
+}
+
+.dashboard .greeting h2 {
+  font-size: 50px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.dashboard .gradPlan {
+  width: 40%;
+  float: left;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.dashboard .gradPlan button {
+  border: none;
+  outline: none;
+  width: 25%;
+  padding: 15px 0;
+  margin: 10px;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background: #860038;
+  cursor: pointer;
+}
+
+.dashboard .gradPlan button:hover{
+  background: #790133;
+}
+
+.dashboard .courseProgress {
+  width: 50%;
+  float: right;
+  font-size: 20px;
+}
+
+.dashboard .courseProgress .progressBar {
+  height: 30px;
+  margin: 20px;
+  background: #fff;
+}
+
+.dashboard .currentCourses {
+  width: 50%;
+  float: right;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.dashboard .currentCourses ul li {
+  width: 6%;
+  border: 2px solid black;
+  margin: 10px;
+  text-align: center;
 }
