@@ -76,4 +76,7 @@ public class PersonController {
     @GetMapping(path = "/currentCourses/{id}")
     public ArrayList<Integer> currentCourses(@PathVariable("id") int id){ return personService.currentCourses(id);}
 
+    @GetMapping(path = "/neededCourses/{id}")
+    public ArrayList<Integer> neededCourses(@PathVariable("id") int id){return personService.neededCourses(id);}
+
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import logo from '/Users/jeancarlo/Desktop/CsudhPlanner/academic-planner-app/src/img/CSUDH-RGB-Logo-Burgundy-Background.png';
-import avatar from '/Users/jeancarlo/Desktop/CsudhPlanner/academic-planner-app/src/img/default-avatar.png';
+import logo from '../img/CSUDH-RGB-Logo-Burgundy-Background.png';
+import avatar from '../img/default-avatar.png';
 import Home from './Home.jsx';
 import Resources from './Resources';
 import Contact from './Contact';

@@ -185,7 +185,6 @@ public class personDataAccessService implements personDao {
         return plan1;
     }
 
-
     @Override
     public ArrayList<ArrayList<Course>> acceleratedPlan(int id){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
@@ -259,6 +258,28 @@ public class personDataAccessService implements personDao {
         Optional<Person> temp = selectPersonById(id);
         Person temp2 = temp.get();
         return temp2.getCurrentCourses();
+    }
+
+    @Override
+    public ArrayList<Integer> neededCourses(int id){
+        Optional<Person> temp = selectPersonById(id);
+        Person person = temp.get();
+
+        List<Course> courses = selectAllCourses();
+
+        ArrayList<Integer> tempList = new ArrayList<>();
+
+        courses.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
+        courses.removeIf(c -> person.getCurrentCourses().contains(c.getNumber()));
+
+
+        for(Course c : courses){
+            tempList.add(c.getNumber());
+        }
+
+        return tempList;
+
+
     }
 
 
