@@ -56,4 +56,6 @@ public class PersonService {
     public ArrayList<Integer> currentCourses(int id){return personDao.currentCourses(id);}
 
     public ArrayList<Integer> neededCourses(int id){return personDao.neededCourses(id);}
+
+    public Integer schoolPlan(int id){return personDao.schoolPlan(id);}
 }

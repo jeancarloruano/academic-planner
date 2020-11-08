@@ -5,6 +5,8 @@ import com.example.CsudhPlanner.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import javax.swing.text.html.Option;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.*;
@@ -23,7 +25,7 @@ public class personDataAccessService implements personDao {
     // People Methods
     @Override
     public int insertPerson(Person person) {
-        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,currentCourses,password,salt) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "Insert INTO person (id, FirstName,LastName, email, completedCourses,currentCourses,schoolPlan,password,salt) VALUES (?,?,?,?,?,?,?,?,?)";
         return jdbcTemplate.update(sql,
                 person.getId(),
                 person.getFirstname(),
@@ -31,6 +33,7 @@ public class personDataAccessService implements personDao {
                 person.getEmail(),
                 createSqlArray(person.getCompletedCourses()),
                 createSqlArray(person.getCurrentCourses()),
+                person.getSchoolPlan(),
                 person.encrypt(person.getPassword(),person.returnSalt()),
                 person.returnSalt()
         );
@@ -46,6 +49,7 @@ public class personDataAccessService implements personDao {
             String email = resultSet.getString("email");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
             ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
+            Integer schoolPlan = resultSet.getInt("schoolPlan");
             String password = resultSet.getString("password");
             String salt = resultSet.getString("salt");
             return new Person(
@@ -55,6 +59,7 @@ public class personDataAccessService implements personDao {
                     email,
                     test,
                     current,
+                    schoolPlan,
                     password,
                     salt);
         });
@@ -95,6 +100,7 @@ public class personDataAccessService implements personDao {
                     String email = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
                     ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
+                    Integer schoolPlan = resultSet.getInt("schoolPlan");
                     String password = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
                     return new Person(
@@ -104,6 +110,7 @@ public class personDataAccessService implements personDao {
                             email,
                             test,
                             current,
+                            schoolPlan,
                             password,
                             salt);
                 });
@@ -124,6 +131,7 @@ public class personDataAccessService implements personDao {
                     String emails = resultSet.getString("email");
                     ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
                     ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
+                    Integer schoolPlan = resultSet.getInt("schoolPlan");
                     String password = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
                     return new Person(
@@ -133,6 +141,7 @@ public class personDataAccessService implements personDao {
                             emails,
                             test,
                             current,
+                            schoolPlan,
                             password,
                             salt);
                 });
@@ -280,6 +289,14 @@ public class personDataAccessService implements personDao {
         return tempList;
 
 
+    }
+
+    @Override
+    public Integer schoolPlan(int id){
+        Optional<Person> temp = selectPersonById(id);
+        Person person = temp.get();
+
+        return person.getSchoolPlan();
     }
 
 

@@ -5,6 +5,7 @@ CREATE TABLE person(
     email VARCHAR(100) UNIQUE,
     completedCourses int[],
     currentCourses int[],
+    schoolPlan INTEGER NOT NULL,
     password VARCHAR NOT NULL,
     salt VARCHAR NOT NULL
 );

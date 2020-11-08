@@ -34,6 +34,8 @@ public interface personDao {
 
     ArrayList<Integer> neededCourses(int id);
 
+    Integer schoolPlan(int id);
+
 
 
 

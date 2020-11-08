@@ -79,4 +79,7 @@ public class PersonController {
     @GetMapping(path = "/neededCourses/{id}")
     public ArrayList<Integer> neededCourses(@PathVariable("id") int id){return personService.neededCourses(id);}
 
+    @GetMapping(path = "/schoolPlan/{id}")
+    public Integer schoolPlan(@PathVariable("id") int id){return  personService.schoolPlan(id);}
+
 }
