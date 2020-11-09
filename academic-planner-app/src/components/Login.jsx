@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from '../img/CSUDH-RGB-Logo-Burgundy-Background.png';
 import AddStudentInfo from './AddStudentInfo';
 import CreateUser from './CreateUser';
 
@@ -71,7 +72,7 @@ class Login extends Component {
         switch (name) {
             case "email":
                 formError.emailError =
-                    emailRegex.test(value) && value.includes('toromail.csudh.edu')
+                    emailRegex.test(value) && value.includes('toromail.csudh.edu', (value.length - 18))
                         ? ""
                         : "Invalid toromail email address.";
                 break;
@@ -93,13 +94,9 @@ class Login extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <CreateUser
-                    email={this.state.email}
-                    password={this.state.password}
-                />
                 <section className="login" >
                     <div className="loginContainer">
-                        <h2>CSUDH</h2>
+                        <h2><img src={logo} alt="logo" className="loginLogo" /></h2>
                         <label htmlFor="email">Email</label>
                         <input
                             type="text"

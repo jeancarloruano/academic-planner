@@ -2,7 +2,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
+}
+
+:root {
+  --speed: 500ms;
+}
+
+a {
+  padding: 5px;
+  display: block;
 }
 
 button {
@@ -52,10 +61,14 @@ ul {
 }
 
 .login .loginContainer h2 {
-  color: #fff;
   text-align: center;
-  font-size: 45px;
 
+}
+
+.login .loginContainer h2 .loginLogo{
+  max-width: 75%;
+  max-height: 75%;
+  margin-bottom: 40px;
 }
 
 .login .loginContainer label {
@@ -233,14 +246,22 @@ ul {
   float: right;
 }
 
-.dashboard header .navBar nav .logo {
-  max-width:20%;
-  max-height:20%;
+.logoDiv {
+  max-width: 20%;
+  max-height: 20%;
   float: left;
 }
 
-.dashboard header .navBar nav .logo:hover {
-  background-color: #00000023;
+.logo {
+  max-width:100%;
+  max-height:100%;
+  float: left;
+  transition: filter 200ms;
+}
+
+.logo:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
 }
 
 .dashboard header .navBar nav ul {
@@ -255,20 +276,45 @@ ul {
   padding: 25px;
 }
 
-.dashboard header .navBar nav .avatar {
+.userAvatar {
   max-width: 5%;
   max-height: 5%;
   float: right;
 }
 
-.dashboard header .navBar nav .avatar:hover {
-  background-color: #00000023;
+.avatar {
+  max-width: 100%;
+  max-height: 100%;
+  float: right;
+  transition: filter 200ms;
+}
+
+.avatar:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
+}
+
+.userMenu {
+  display: flex;
+}
+
+.userMenu ul {
+  margin-top: 50px;
+  display: none;
+  float: left;
+}
+
+.userAvatar:hover .userMenu ul {
+  margin-top: 50px;
+  display: none;
+  position: absolute;
 }
 
 .dashboard nav button {
   width: 100px;
   padding: 8px 0;
-  background: #860038;;
+  background: #860038;
+  transition: color 200ms;
 }
 
 .dashboard nav button:hover {

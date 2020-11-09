@@ -59,7 +59,7 @@ class Home extends Component {
         return (
             <div>
                 <div className="greeting">
-                    <h2>Hello, {`${this.state.firstName}`}</h2>
+                    <h2>Welcome, {`${this.state.firstName}`}</h2>
                 </div>
                 <div className="gradPlan">
                     <h3>Your Current Graduation Plan:</h3>

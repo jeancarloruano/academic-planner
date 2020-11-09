@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-class MyReport extends Component {
+class Settings extends Component {
     constructor(props) {
         super(props);
 
@@ -20,9 +20,9 @@ class MyReport extends Component {
 
     render() {
         return (
-            <div><h2>My Pogress Report:</h2></div>
+            <div>Settings</div>
         );
     }
 }
 
-export default MyReport;
+export default Settings;
