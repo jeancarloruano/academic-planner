@@ -1,7 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import { useState, Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+=======
+import { Component } from 'react';
+>>>>>>> cea80d413cc6ec30a8c1f649d5799a2bedb0dcff
 import logo from '../img/CSUDH-RGB-Logo-Burgundy-Background.png';
 import avatar from '../img/default-avatar.png';
 import Home from './Home.jsx';
