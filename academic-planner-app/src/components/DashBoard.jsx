@@ -1,11 +1,7 @@
 import React from 'react';
-<<<<<<< HEAD
 import { useState, Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-=======
-import { Component } from 'react';
->>>>>>> cea80d413cc6ec30a8c1f649d5799a2bedb0dcff
 import logo from '../img/CSUDH-RGB-Logo-Burgundy-Background.png';
 import avatar from '../img/default-avatar.png';
 import Home from './Home.jsx';
@@ -23,10 +19,12 @@ class DashBoard extends Component {
             id: '',
             firstName: '',
             lastName: '',
-            email: '',
+            email: 'abruno1@toromail.csudh.edu',
             completedCourses: [],
             currentCourses: [],
-            graduationPlan: ''
+            pendingCourses: [],
+            graduationPlan: '',
+            enrollmentStatus: 'On Track'
         };
     }
 
@@ -37,9 +35,45 @@ class DashBoard extends Component {
     }
 
     fetchUserData = async () => {
-        const data = await fetch('https://jsonplaceholder.typicode.com/users');
+        let url = ("http://localhost:8080/api/v1/person/email/" + this.state.email + "/");
+        let gradPlan = '';
+        const data = await fetch(url);
         const items = await data.json();
-        console.log(items);
+        //console.log(items);
+
+        switch (items.schoolPlan) {
+            case 0:
+                gradPlan = 'Standard';
+                break;
+
+            case 1:
+                gradPlan = 'Accelerated';
+                break;
+
+            case 2:
+                gradPlan = 'Part-Time';
+                break;
+
+            default:
+                gradPlan = 'Standard';
+                break;
+        }
+
+        let penCourURL = ('http://localhost:8080/api/v1/person/neededCourses/' + items.id + '/');
+        const res = await fetch(penCourURL);
+        const penCourses = await res.json();
+        //console.log(penCourses);
+
+        this.setState({
+            id: items.id,
+            firstName: items.firstname,
+            lastName: items.lastname,
+            completedCourses: items.completedCourses,
+            currentCourses: items.currentCourses,
+            pendingCourses: penCourses,
+            graduationPlan: gradPlan
+        })
+        console.log(this.state);
     }
 
     render() {
@@ -71,8 +105,27 @@ class DashBoard extends Component {
                         </div>
                     </header>
                     <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/myreport" component={MyReport} />
+                        <Route path="/" exact component={() => <Home
+                            id={this.state.id}
+                            firstName={this.state.firstName}
+                            lastName={this.state.lastName}
+                            email={this.state.email}
+                            completedCourses={this.state.completedCourses}
+                            graduationPlan={this.state.graduationPlan}
+                            currentCourses={this.state.currentCourses}
+                            enrollmentStatus={this.state.enrollmentStatus} />}
+                        />
+                        <Route path="/myreport" component={() => <MyReport
+                            id={this.state.id}
+                            firstName={this.state.firstName}
+                            lastName={this.state.lastName}
+                            email={this.state.email}
+                            completedCourses={this.state.completedCourses}
+                            graduationPlan={this.state.graduationPlan}
+                            currentCourses={this.state.currentCourses}
+                            enrollmentStatus={this.state.enrollmentStatus}
+                            pendingCourses={this.state.pendingCourses} />}
+                        />
                         <Route path="/resources" component={Resources} />
                         <Route path="/contact" component={Contact} />
                         <Route path="/settings" component={Settings} />

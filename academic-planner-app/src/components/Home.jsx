@@ -7,14 +7,14 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            id: '',
-            firstName: 'James',
-            lastName: '',
-            email: '',
-            completedCourses: [115, 121, 123, 311, 321],
-            currentCourses: [295, 255, 471],
-            graduationPlan: 'Part-Time',
-            enrollmentStatus: 'Good Standing'
+            id: this.props.id,
+            firstName: this.props.firstName,
+            lastName: this.props.lastName,
+            email: this.props.email,
+            completedCourses: this.props.completedCourses,
+            currentCourses: this.props.currentCourses,
+            graduationPlan: this.props.graduationPlan,
+            enrollmentStatus: this.props.enrollmentStatus
         };
     }
 
@@ -62,7 +62,7 @@ class Home extends Component {
                     <h2>Welcome, {`${this.state.firstName}`}</h2>
                 </div>
                 <div className="gradPlan">
-                    <h3>Your Current Graduation Plan:</h3>
+                    <h3>Your Current Academic Plan:</h3>
                     {`${this.state.graduationPlan}`} Enrollment <br />
                     <button>Change Plan</button>
                 </div>
