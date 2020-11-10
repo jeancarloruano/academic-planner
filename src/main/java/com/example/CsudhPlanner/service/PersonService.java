@@ -45,15 +45,15 @@ public class PersonService {
 
     public Integer updatePerson(int id, Person newPerson){return personDao.updatePersonById(id,newPerson);}
 
-    public ArrayList<ArrayList<Course>> standardPlan(int id){ return personDao.standardPlan(id);}
+    public ArrayList<ArrayList<Course>> standardPlan(String email){ return personDao.standardPlan(email);}
 
-    public ArrayList<ArrayList<Course>> acceleratedPlan(int id){return personDao.acceleratedPlan(id);}
+    public ArrayList<ArrayList<Course>> acceleratedPlan(String email){return personDao.acceleratedPlan(email);}
 
-    public ArrayList<ArrayList<Course>> partTimePlan(int id){return  personDao.partTimePlan(id);}
+    public ArrayList<ArrayList<Course>> partTimePlan(String email){return  personDao.partTimePlan(email);}
 
     public boolean checkPassword(String email,String password){return  personDao.checkPassword(email,password);}
 
-    public ArrayList<Integer> currentCourses(int id){return personDao.currentCourses(id);}
+    public ArrayList<Integer> currentCourses(String email){return personDao.currentCourses(email);}
 
     public ArrayList<Integer> neededCourses(int id){return personDao.neededCourses(id);}
 

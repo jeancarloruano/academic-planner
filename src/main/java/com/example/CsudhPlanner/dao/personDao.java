@@ -22,15 +22,15 @@ public interface personDao {
 
     int updatePersonById(int id, Person person);
 
-    ArrayList<ArrayList<Course>> standardPlan(int id);
+    ArrayList<ArrayList<Course>> standardPlan(String email);
 
-    ArrayList<ArrayList<Course>> acceleratedPlan(int id);
+    ArrayList<ArrayList<Course>> acceleratedPlan(String email);
 
-    ArrayList<ArrayList<Course>> partTimePlan(int id);
+    ArrayList<ArrayList<Course>> partTimePlan(String email);
 
     boolean checkPassword(String email,String password);
 
-    ArrayList<Integer> currentCourses(int id);
+    ArrayList<Integer> currentCourses(String email);
 
     ArrayList<Integer> neededCourses(int id);
 

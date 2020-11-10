@@ -159,6 +159,8 @@ public class personDataAccessService implements personDao {
     public int updatePersonById(int id, Person person) {
         String sql = "UPDATE person " +
                 "SET completedCourses =  '"  + createSqlArray(person.getCompletedCourses()) +
+                "', schoolPlan = '" + person.getSchoolPlan() +
+                "', currentCourses = '" + createSqlArray(person.getCurrentCourses())+
                 "' WHERE id = " + id;
 
         jdbcTemplate.update(sql);
@@ -168,12 +170,12 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public ArrayList<ArrayList<Course>> standardPlan(int id){
+    public ArrayList<ArrayList<Course>> standardPlan(String email){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
 
-        Optional<Person> tempPerson = selectPersonById(id);
+        Optional<Person> tempPerson = selectPersonByEmail(email);
         Person person = tempPerson.get();
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
@@ -195,12 +197,12 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public ArrayList<ArrayList<Course>> acceleratedPlan(int id){
+    public ArrayList<ArrayList<Course>> acceleratedPlan(String email){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
 
-        Optional<Person> tempPerson = selectPersonById(id);
+        Optional<Person> tempPerson = selectPersonByEmail(email);
         Person person = tempPerson.get();
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
@@ -222,12 +224,12 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public ArrayList<ArrayList<Course>> partTimePlan(int id){
+    public ArrayList<ArrayList<Course>> partTimePlan(String email){
         ArrayList<ArrayList<Course>> plan1 = new ArrayList<>();
         List<Course> allCourses = selectAllCourses();
         ArrayList<Course> allCourses2 = new ArrayList<>(allCourses);
 
-        Optional<Person> tempPerson = selectPersonById(id);
+        Optional<Person> tempPerson = selectPersonByEmail(email);
         Person person = tempPerson.get();
 
 
@@ -253,18 +255,21 @@ public class personDataAccessService implements personDao {
     public boolean checkPassword(String email,String password){
 
         Optional<Person> person = selectPersonByEmail(email);
-        Person storedUser = person.get();
+        if(person.isPresent()) {
+            Person storedUser = person.get();
 
-        String de = storedUser.decrypt(storedUser.getPassword(),storedUser.returnSalt());
+            String de = storedUser.decrypt(storedUser.getPassword(), storedUser.returnSalt());
 
-        return password.equals(de);
-
+            return password.equals(de);
+        }
+        else
+            return false;
 
     }
 
     @Override
-    public ArrayList<Integer> currentCourses(int id){
-        Optional<Person> temp = selectPersonById(id);
+    public ArrayList<Integer> currentCourses(String email){
+        Optional<Person> temp = selectPersonByEmail(email);
         Person temp2 = temp.get();
         return temp2.getCurrentCourses();
     }

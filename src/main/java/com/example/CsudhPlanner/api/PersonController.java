@@ -59,27 +59,28 @@ public class PersonController {
         personService.updatePerson(id, personToUpdate);
     }
 
-    @GetMapping(path = "/{id}/standardPlan")
-    public ArrayList<ArrayList<Course>> standardPlan(@PathVariable("id") int id){
-        return personService.standardPlan(id);
+    @GetMapping(path = "/standardPlan/{email}")
+    public ArrayList<ArrayList<Course>> standardPlan(@PathVariable("email") String email){
+        return personService.standardPlan(email);
     }
 
-    @GetMapping(path = "/{id}/acceleratedPlan")
-    public ArrayList<ArrayList<Course>> acceleratedPlan(@PathVariable("id") int id){return personService.acceleratedPlan(id);}
+    @GetMapping(path = "/acceleratedPlan/{email}")
+    public ArrayList<ArrayList<Course>> acceleratedPlan(@PathVariable("email") String email){return personService.acceleratedPlan(email);}
 
-    @GetMapping(path = "/{id}/partTimePlan")
-    public ArrayList<ArrayList<Course>> partTimePlan(@PathVariable("id") int id){return  personService.partTimePlan(id);}
+    @GetMapping(path = "/partTimePlan/{email}")
+    public ArrayList<ArrayList<Course>> partTimePlan(@PathVariable("email") String email){return  personService.partTimePlan(email);}
 
     @GetMapping(path = "/checkPass/{email}/{password}")
     public boolean checkPass(@PathVariable("email") String email,@PathVariable("password") String password){ return personService.checkPassword(email,password);}
 
-    @GetMapping(path = "/currentCourses/{id}")
-    public ArrayList<Integer> currentCourses(@PathVariable("id") int id){ return personService.currentCourses(id);}
+    @GetMapping(path = "/currentCourses/{email}")
+    public ArrayList<Integer> currentCourses(@PathVariable("email") String email){ return personService.currentCourses(email);}
 
     @GetMapping(path = "/neededCourses/{id}")
     public ArrayList<Integer> neededCourses(@PathVariable("id") int id){return personService.neededCourses(id);}
 
     @GetMapping(path = "/schoolPlan/{id}")
     public Integer schoolPlan(@PathVariable("id") int id){return  personService.schoolPlan(id);}
+    
 
 }
