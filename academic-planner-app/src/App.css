@@ -107,7 +107,7 @@ ul {
   letter-spacing: 0.5px;
   margin-left: 5px;
   cursor: pointer;
-  transition: all 400ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .login .loginContainer .btnContainer p span:hover {

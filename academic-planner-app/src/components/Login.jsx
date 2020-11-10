@@ -17,49 +17,48 @@ const formValid = formError => {
     return valid;
 }
 
+var abortController = new AbortController();
+
 class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            id: '',
-            firstName: '',
-            lastName: '',
             email: '',
-            completedCourses: [],
             password: '',
             formError: {
                 emailError: '',
                 passwordError: '',
                 inputError: ''
-            }
+            },
+            hasAccount: true,
+            emailPassValid: false
         };
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        let emailExists = true;
         let isValid = false;
 
-        if (formValid(this.state.formError) && (emailExists === true)) {
+        if (formValid(this.state.formError)) {
             console.log(`
             --SUBMITTING--
             Email: ${this.state.email}
             Password: ${this.state.password}
             `);
-
             isValid = true;
 
-            /*return (
-                <CreateUser
-                    email='{this.state.email}'
-                    password='{this.state.password}'
-                />
-            )*/
+            this.checkEmailPass();
+            if (this.state.emailPassValid === true) {
+                this.userIsActive();
+            }
+
+            else {
+                console.log("Incorrect email or password...")
+            }
 
         } else {
             console.error('FORM INVALID -- DISPLAY ERROR MESSAGE')
-            console.log("Existing email: " + emailExists);
         }
     };
 
@@ -79,17 +78,43 @@ class Login extends Component {
 
             case "password":
                 formError.passwordError =
-                    value.length <= 12 && value.length >= 8
+                    value.length <= 16 && value.length >= 8
                         ? ""
-                        : "Password must be between 8 to 12 characters in length.";
+                        : "Password must be between 8 to 16 characters in length.";
 
         }
 
         this.setState({ formError, [name]: value }, () => console.log(this.state));
     };
 
+    handleLogin = e => {
 
+    }
 
+    handleSignUp = e => {
+
+    }
+
+    userIsActive = () => {
+        console.log(this.state.emailPassValid);
+        this.props.callBack(this.state.emailPassValid);
+    }
+
+    checkEmailPass = async () => {
+        let url = 'http://localhost:8080/api/v1/person/checkPass/' + this.state.email + '/' + this.state.password + '/';
+        //console.log(url);
+        const data = await fetch(url);
+        const items = await data.json();
+        //console.log(items);
+        this.setState({
+            emailPassValid: items
+        });
+        //console.log(this.state.emailPassValid);
+    }
+
+    componentWillUnmount() {
+        abortController.abort();
+    }
 
     render() {
         return (
@@ -120,6 +145,7 @@ class Login extends Component {
 
                         <div className="btnContainer">
                             <button onClick={this.handleLogin}>Sign In</button>
+                            <p>Don't have an account? <span onClick={this.setFalse}>Sign up</span></p>
                         </div>
                     </div>
                 </section>

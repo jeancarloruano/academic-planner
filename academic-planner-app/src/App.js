@@ -7,19 +7,27 @@ import AddStudentInfo from "./components/AddStudentInfo";
 import AddCourses from "./components/AddCourses";
 import AuthenicateUser from "./components/AuthenticateUser";*/
 
-let isLoggedIn = true;
 
 class App extends Component {
+
+  state = {
+    isLoggedIn: false
+  }
+
+  userExists = (bool) => {
+    this.setState({ isLoggedIn: bool })
+  }
 
 
   render() {
     return (
       <div>
         <>
-          {isLoggedIn ? (
+          {console.log(this.state.isLoggedIn)}
+          {this.state.isLoggedIn ? (
             <DashBoard />
           ) : (
-              <Login />
+              <Login callBack={this.userExists} />
             )}
         </>
       </div >

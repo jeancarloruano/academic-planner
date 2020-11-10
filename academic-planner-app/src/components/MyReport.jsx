@@ -16,9 +16,7 @@ class MyReport extends Component {
             pendingCourses: this.props.pendingCourses,
             graduationPlan: this.props.graduationPlan,
             enrollmentStatus: this.props.enrollmentStatus,
-            recommendedCourses: [
-                []
-            ]
+            recommendedCourses: []
         };
     }
 
@@ -56,9 +54,12 @@ class MyReport extends Component {
         const data = await fetch(url);
         const recCourses = await data.json();
         console.log(recCourses);
+        console.log(typeof recCourses);
+
+        let toArrray = Object.keys(recCourses);
 
         this.setState({
-            //recommendedCourses: recCourses[0]
+            recommendedCourses: toArrray
         });
 
     }
@@ -90,8 +91,8 @@ class MyReport extends Component {
                 </div>
                 <div>
                     Plan: {`${this.state.graduationPlan}`} <br />
-                    Recomended Courses:
-                    <p>{this.state.recommendedCourses}</p>
+                    Your Course Guideline:
+                        <p>{this.state.recommendedCourses}</p>
                 </div>
             </div>
         );
