@@ -253,17 +253,16 @@ public class personDataAccessService implements personDao {
 
     @Override
     public boolean checkPassword(String email,String password){
-
+        try{
         Optional<Person> person = selectPersonByEmail(email);
-        if(person.isPresent()) {
-            Person storedUser = person.get();
+        Person storedUser = person.get();
 
             String de = storedUser.decrypt(storedUser.getPassword(), storedUser.returnSalt());
 
             return password.equals(de);
-        }
-        else
+        }catch (Exception o) {
             return false;
+        }
 
     }
 
