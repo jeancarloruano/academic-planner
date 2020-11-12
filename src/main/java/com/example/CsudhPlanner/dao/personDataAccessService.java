@@ -179,6 +179,9 @@ public class personDataAccessService implements personDao {
         Person person = tempPerson.get();
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
+        allCourses2.removeIf(c -> person.getCurrentCourses().contains(c.getNumber()));
+
+
 
 
         ArrayList<Course> temp = new ArrayList<>();
@@ -192,6 +195,10 @@ public class personDataAccessService implements personDao {
 
             temp.add(c);
             tally += c.getCredits();
+
+            if(allCourses2.get(allCourses2.toArray().length - 1) == c){
+                plan1.add(temp);
+            }
         }
         return plan1;
     }
@@ -206,7 +213,7 @@ public class personDataAccessService implements personDao {
         Person person = tempPerson.get();
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
-
+        allCourses2.removeIf(c -> person.getCurrentCourses().contains(c.getNumber()));
 
         ArrayList<Course> temp = new ArrayList<>();
         int tally = 0;
@@ -219,6 +226,10 @@ public class personDataAccessService implements personDao {
 
             temp.add(c);
             tally += c.getCredits();
+
+            if(allCourses2.get(allCourses2.toArray().length - 1) == c){
+                plan1.add(temp);
+            }
         }
         return plan1;
     }
@@ -234,6 +245,7 @@ public class personDataAccessService implements personDao {
 
 
         allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
+        allCourses2.removeIf(c -> person.getCurrentCourses().contains(c.getNumber()));
 
 
         ArrayList<Course> temp = new ArrayList<>();
@@ -247,6 +259,10 @@ public class personDataAccessService implements personDao {
 
             temp.add(c);
             tally += c.getCredits();
+
+            if(allCourses2.get(allCourses2.toArray().length - 1) == c){
+                plan1.add(temp);
+            }
         }
         return plan1;
     }
@@ -321,12 +337,14 @@ public class personDataAccessService implements personDao {
     public List<Course> selectAllCourses(){
         final String sql = "SELECT * FROM courses";
         return jdbcTemplate.query(sql,(resultSet , i) -> {
+            String keyNumber = resultSet.getString("keyNumber");
             int number = resultSet.getInt("number");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
             ArrayList<Integer> test = createArrayList(resultSet.getArray("prerequisites"));
             int credits = resultSet.getInt("credits");
             return new Course(
+                    keyNumber,
                     number,
                     name,
                     description,
@@ -342,12 +360,14 @@ public class personDataAccessService implements personDao {
                 sql,
                 new Object[]{number},
                 (resultSet , i) -> {
+                    String keyNumber = resultSet.getString("keyNumber");
                     int courseID = resultSet.getInt("number");
                     String name = resultSet.getString("name");
                     String description = resultSet.getString("description");
                     ArrayList<Integer> prerequisites = createArrayList(resultSet.getArray("prerequisites"));
                     int credits = resultSet.getInt("credits");
                     return new Course(
+                            keyNumber,
                             courseID,
                             name,
                             description,

@@ -20,22 +20,14 @@ import com.example.CsudhPlanner.secrets;
 
 public class Person {
 
-    @NonNull
     private final Integer id;
-
-    @NonNull
     private final String Firstname;
-    @NonNull
     private final String LastName;
     private final String email;
-    @NonNull
     private final ArrayList<Integer> completedCourses;
     private final ArrayList<Integer> currentCourses;
     private final Integer schoolPlan;
-    @NonNull
     private final String password;
-
-    @NonNull
     private final String salt; //Salts Need to be generated from front End
 
     private static final Random RANDOM = new SecureRandom();
@@ -45,9 +37,9 @@ public class Person {
                   @NonNull @JsonProperty("FirstName") String FirstName,
                   @NonNull @JsonProperty("LastName") String LastName,
                   @NonNull @JsonProperty("email") String email,
-                  @NonNull @JsonProperty("completedCourses") ArrayList<Integer> completed,
+                  @JsonProperty("completedCourses") ArrayList<Integer> completed,
                   @JsonProperty("currentCourses") ArrayList<Integer> current,
-                  @JsonProperty("schoolPlan") Integer schoolPlan,
+                  @NonNull@JsonProperty("schoolPlan") Integer schoolPlan,
                   @NonNull @JsonProperty("password") String password,
                   @NonNull @JsonProperty("salt") String salt) {
 

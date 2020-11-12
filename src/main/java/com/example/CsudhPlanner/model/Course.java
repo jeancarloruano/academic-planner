@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Course {
 
+    private final String keyNumber;
     private final int number;
 
     @NonNull
@@ -18,11 +19,13 @@ public class Course {
     private final int credits;
 
 
-    public Course(@NonNull@JsonProperty("number") int number,
-                  @NonNull @JsonProperty("name") String name,
-                  @JsonProperty("description") String description,
-                  @JsonProperty("prerequisites") ArrayList<Integer> prerequistes,
-                  @JsonProperty("credits") int credits) {
+    public Course(@NonNull @JsonProperty("KeyNumber") String keyNumber,
+                  @NonNull @JsonProperty("Number") int number,
+                  @NonNull @JsonProperty("Name") String name,
+                  @JsonProperty("Description") String description,
+                  @JsonProperty("Prerequisites") ArrayList<Integer> prerequistes,
+                  @JsonProperty("Credits") int credits) {
+        this.keyNumber = keyNumber;
         this.number = number;
         this.name = name;
         this.description = description;
@@ -34,6 +37,8 @@ public class Course {
     public int getNumber(){
         return this.number;
     }
+
+    public String getKeyNumber(){return this.keyNumber;}
 
     @NonNull
     public String getName(){
