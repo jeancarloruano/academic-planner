@@ -16,12 +16,15 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.3.3.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -88,7 +91,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
+				<version>2.3.3.RELEASE</version>
+				<configuration>
+					<mainClass>com.example.CsudhPlanner.CsudhPlannerApplication</mainClass>
+				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 	<repositories>
