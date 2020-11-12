@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Login from './components/Login';
 import DashBoard from './components/DashBoard';
+import CreateUser from "./components/CreateUser";
+import AddStudentInfo from "./components/AddStudentInfo";
 /*import CreateUser from './components/CreateUser.jsx'
 import AddStudentInfo from "./components/AddStudentInfo";
 import AddCourses from "./components/AddCourses";
@@ -34,6 +36,9 @@ class App extends Component {
               <Login callBack={this.userExists} getEmail={this.activeEmail} />
             )}
         </>
+
+        <AddStudentInfo />
+        <AddCourses />
       </div >
 
     );
