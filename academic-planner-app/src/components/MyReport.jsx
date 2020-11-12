@@ -64,6 +64,36 @@ class MyReport extends Component {
 
     }
 
+    listCurrentCourses = () => {
+        let listCurrentCourses;
+
+        listCurrentCourses = this.state.currentCourses.map((currentCourse) =>
+            <li key={currentCourse}>{currentCourse}</li>
+        );
+
+        return listCurrentCourses;
+    }
+
+    listCompletedCourses = () => {
+        let listCompletedCourses;
+
+        listCompletedCourses = this.state.completedCourses.map((completedCourse) =>
+            <li key={completedCourse}>{completedCourse}</li>
+        );
+
+        return listCompletedCourses;
+    }
+
+    listRemainingCourses = () => {
+        let listRemainingCourses;
+
+        listRemainingCourses = this.state.pendingCourses.map((pendingCourse) =>
+            <li key={pendingCourse}>{pendingCourse}</li>
+        );
+
+        return listRemainingCourses;
+    }
+
     render() {
         return (
             <div>
@@ -75,13 +105,13 @@ class MyReport extends Component {
                     <p>{this.state.id}</p>
                 </div>
                 <div>Your Current Courses:
-                    <p>{this.state.currentCourses}</p>
+                    <p>{this.listCurrentCourses}</p>
                 </div>
                 <div>Your Completed Courses:
-                    <p>{this.state.completedCourses}</p>
+                    <p>{this.listCompletedCourses}</p>
                 </div>
                 <div>Your Remaining Courses:
-                    <p>{this.state.pendingCourses}</p>
+                    <p>{this.listRemainingCourses}</p>
                 </div>
                 <div>Your Graduation Plan:
                     <p>{this.state.graduationPlan}</p>
