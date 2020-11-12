@@ -19,7 +19,7 @@ class DashBoard extends Component {
             id: '',
             firstName: '',
             lastName: '',
-            email: 'abruno1@toromail.csudh.edu',
+            email: this.props.email,
             completedCourses: [],
             currentCourses: [],
             pendingCourses: [],
@@ -32,6 +32,7 @@ class DashBoard extends Component {
 
     componentDidMount() {
         this.fetchUserData();
+        console.log(this.props.email);
     }
 
     fetchUserData = async () => {

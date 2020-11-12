@@ -97,23 +97,22 @@ class Login extends Component {
 
     userIsActive = () => {
         console.log(this.state.emailPassValid);
+        console.log(this.state.email);
         this.props.callBack(this.state.emailPassValid);
+        this.props.getEmail(this.state.email);
     }
 
-    checkEmailPass = async () => {
+    checkEmailPass = () => {
         let url = 'http://localhost:8080/api/v1/person/checkPass/' + this.state.email + '/' + this.state.password + '/';
         //console.log(url);
-        const data = await fetch(url);
-        const items = await data.json();
-        //console.log(items);
-        this.setState({
-            emailPassValid: items
-        });
+        fetch(url)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    emailPassValid: json
+                })
+            })
         //console.log(this.state.emailPassValid);
-    }
-
-    componentWillUnmount() {
-        abortController.abort();
     }
 
     render() {

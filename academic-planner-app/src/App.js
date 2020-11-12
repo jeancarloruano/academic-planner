@@ -11,13 +11,17 @@ import AuthenicateUser from "./components/AuthenticateUser";*/
 class App extends Component {
 
   state = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    email: ''
   }
 
   userExists = (bool) => {
     this.setState({ isLoggedIn: bool })
   }
 
+  activeEmail = (userEmail) => {
+    this.setState({ email: userEmail });
+  }
 
   render() {
     return (
@@ -25,9 +29,9 @@ class App extends Component {
         <>
           {console.log(this.state.isLoggedIn)}
           {this.state.isLoggedIn ? (
-            <DashBoard />
+            <DashBoard email={this.state.email} />
           ) : (
-              <Login callBack={this.userExists} />
+              <Login callBack={this.userExists} getEmail={this.activeEmail} />
             )}
         </>
       </div >
