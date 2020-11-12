@@ -105,13 +105,13 @@ class MyReport extends Component {
                     <p>{this.state.id}</p>
                 </div>
                 <div>Your Current Courses:
-                    <p>{this.listCurrentCourses}</p>
+                    <ul>{this.listCurrentCourses()}</ul>
                 </div>
                 <div>Your Completed Courses:
-                    <p>{this.listCompletedCourses}</p>
+                    <ul>{this.listCompletedCourses()}</ul>
                 </div>
                 <div>Your Remaining Courses:
-                    <p>{this.listRemainingCourses}</p>
+                    <ul>{this.listRemainingCourses()}</ul>
                 </div>
                 <div>Your Graduation Plan:
                     <p>{this.state.graduationPlan}</p>
