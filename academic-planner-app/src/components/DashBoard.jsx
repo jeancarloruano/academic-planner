@@ -9,6 +9,7 @@ import MyReport from './MyReport';
 import Resources from './Resources';
 import Contact from './Contact';
 import Settings from './Settings';
+import CourseDetails from './CourseDetails';
 
 
 class DashBoard extends Component {
@@ -130,6 +131,7 @@ class DashBoard extends Component {
                         <Route path="/resources" component={Resources} />
                         <Route path="/contact" component={Contact} />
                         <Route path="/settings" component={Settings} />
+                        <Route path="/courses/:cd" component={CourseDetails} />
                     </Switch>
                 </Router>
             </section >

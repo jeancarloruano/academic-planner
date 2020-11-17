@@ -50,7 +50,9 @@ class Home extends Component {
         let listCourses;
 
         listCourses = this.state.currentCourses.map((currentCourse) =>
-            <li key={currentCourse}>{currentCourse}</li>
+            <li key={currentCourse}>
+                <Link to={`/courses/${currentCourse}`}>{currentCourse}</Link>
+            </li>
         );
 
         console.log(listCourses);

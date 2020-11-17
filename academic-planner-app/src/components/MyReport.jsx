@@ -96,7 +96,7 @@ class MyReport extends Component {
 
     render() {
         return (
-            <div>
+            <div className="myReport">
                 <h2>My Progress Report:</h2>
                 <div>Student Name:
                     <p>{this.state.firstName} {this.state.lastName}</p>
@@ -104,13 +104,13 @@ class MyReport extends Component {
                 <div>Student ID:
                     <p>{this.state.id}</p>
                 </div>
-                <div>Your Current Courses:
+                <div className="listedCourses">Your Current Courses:
                     <ul>{this.listCurrentCourses()}</ul>
                 </div>
-                <div>Your Completed Courses:
+                <div className="listedCourses">Your Completed Courses:
                     <ul>{this.listCompletedCourses()}</ul>
                 </div>
-                <div>Your Remaining Courses:
+                <div className="listedCourses">Your Remaining Courses:
                     <ul>{this.listRemainingCourses()}</ul>
                 </div>
                 <div>Your Graduation Plan:

@@ -377,7 +377,11 @@ ul {
 
 .dashboard .currentCourses ul li {
   width: 6%;
-  border: 2px solid black;
+  border: none;
   margin: 10px;
   text-align: center;
+}
+
+.myReport .listedCourses ul {
+  list-style-type: none;
 }

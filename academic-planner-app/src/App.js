@@ -34,9 +34,6 @@ class App extends Component {
               <Login callBack={this.userExists} getEmail={this.activeEmail} />
             )}
         </>
-
-        <AddStudentInfo />
-        <AddCourses />
       </div >
 
     );
