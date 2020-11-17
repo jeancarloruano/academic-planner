@@ -31,8 +31,8 @@ public class CourseService {
         return personDao.selectAllCourses();
     }
 
-    public Optional<Course> getCourseById(int id){
-        return personDao.selectCourseById(id);
+    public Optional<Course> getCourseById(String keyNumber){
+        return personDao.selectCourseById(keyNumber);
     }
 
     public int deleteCourseById(int id){return personDao.deleteCourseById(id);}

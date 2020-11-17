@@ -43,7 +43,7 @@ public interface personDao {
 
     List<Course> selectAllCourses();
 
-    Optional<Course> selectCourseById(Integer id);
+    Optional<Course> selectCourseById(String keyNumber);
 
     int deleteCourseById(int number);
 

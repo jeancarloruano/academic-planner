@@ -354,20 +354,20 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public Optional<Course> selectCourseById(Integer number){
-        final String sql = "SELECT * FROM courses WHERE number = ?";
+    public Optional<Course> selectCourseById(String keyNumber){
+        final String sql = "SELECT * FROM courses WHERE keyNumber = ?";
         Course course = jdbcTemplate.queryForObject(
                 sql,
-                new Object[]{number},
+                new Object[]{keyNumber},
                 (resultSet , i) -> {
-                    String keyNumber = resultSet.getString("keyNumber");
+                    String keyNumber2 = resultSet.getString("keyNumber");
                     int courseID = resultSet.getInt("number");
                     String name = resultSet.getString("name");
                     String description = resultSet.getString("description");
                     ArrayList<Integer> prerequisites = createArrayList(resultSet.getArray("prerequisites"));
                     int credits = resultSet.getInt("credits");
                     return new Course(
-                            keyNumber,
+                            keyNumber2,
                             courseID,
                             name,
                             description,

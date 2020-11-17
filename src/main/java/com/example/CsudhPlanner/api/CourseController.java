@@ -35,9 +35,9 @@ public class CourseController {
         return CourseService.getAllCourses();
     }
 
-    @GetMapping(path = "{id}")
-    public Course getCourseById(@PathVariable("id") int id){
-        return CourseService.getCourseById(id).orElse(null);
+    @GetMapping(path = "{keyNumber}")
+    public Course getCourseById(@PathVariable("keyNumber") String keyNumber){
+        return CourseService.getCourseById(keyNumber).orElse(null);
     }
 
 
