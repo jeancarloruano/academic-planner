@@ -30,9 +30,9 @@ public interface personDao {
 
     boolean checkPassword(String email,String password);
 
-    ArrayList<Integer> currentCourses(String email);
+    ArrayList<String> currentCourses(String email);
 
-    ArrayList<Integer> neededCourses(int id);
+    ArrayList<String> neededCourses(int id);
 
     Integer schoolPlan(int id);
 

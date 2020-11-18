@@ -15,7 +15,7 @@ public class Course {
     @NonNull
     private final String name;
     private final String description;
-    private final ArrayList<Integer> prerequisites;
+    private final ArrayList<String> prerequisites;
     private final int credits;
 
 
@@ -23,7 +23,7 @@ public class Course {
                   @NonNull @JsonProperty("Number") int number,
                   @NonNull @JsonProperty("Name") String name,
                   @JsonProperty("Description") String description,
-                  @JsonProperty("Prerequisites") ArrayList<Integer> prerequistes,
+                  @JsonProperty("Prerequisites") ArrayList<String> prerequistes,
                   @JsonProperty("Credits") int credits) {
         this.keyNumber = keyNumber;
         this.number = number;
@@ -49,7 +49,7 @@ public class Course {
         return description;
     }
 
-    public ArrayList<Integer> getPrerequistes(){
+    public ArrayList<String> getPrerequistes(){
         return prerequisites;
     }
 

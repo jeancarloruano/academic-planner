@@ -24,8 +24,8 @@ public class Person {
     private final String Firstname;
     private final String LastName;
     private final String email;
-    private final ArrayList<Integer> completedCourses;
-    private final ArrayList<Integer> currentCourses;
+    private final ArrayList<String> completedCourses;
+    private final ArrayList<String> currentCourses;
     private final Integer schoolPlan;
     private final String password;
     private final String salt; //Salts Need to be generated from front End
@@ -37,8 +37,8 @@ public class Person {
                   @NonNull @JsonProperty("FirstName") String FirstName,
                   @NonNull @JsonProperty("LastName") String LastName,
                   @NonNull @JsonProperty("email") String email,
-                  @JsonProperty("completedCourses") ArrayList<Integer> completed,
-                  @JsonProperty("currentCourses") ArrayList<Integer> current,
+                  @JsonProperty("completedCourses") ArrayList<String> completed,
+                  @JsonProperty("currentCourses") ArrayList<String> current,
                   @NonNull@JsonProperty("schoolPlan") Integer schoolPlan,
                   @NonNull @JsonProperty("password") String password,
                   @NonNull @JsonProperty("salt") String salt) {
@@ -81,11 +81,11 @@ public class Person {
     public String returnSalt(){ return salt;}
 
     @NonNull
-    public ArrayList<Integer> getCompletedCourses(){
+    public ArrayList<String> getCompletedCourses(){
         return completedCourses;
     }
 
-    public ArrayList<Integer> getCurrentCourses(){return currentCourses;}
+    public ArrayList<String> getCurrentCourses(){return currentCourses;}
 
     public Integer getSchoolPlan(){return schoolPlan;}
 

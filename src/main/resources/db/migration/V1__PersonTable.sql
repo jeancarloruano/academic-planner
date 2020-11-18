@@ -3,8 +3,8 @@ CREATE TABLE person(
     FirstName VARCHAR(100) NOT NULL,
     LastName VARCHAR NOT NULL,
     email VARCHAR(100) UNIQUE,
-    completedCourses int[],
-    currentCourses int[],
+    completedCourses TEXT[],
+    currentCourses TEXT[],
     schoolPlan INTEGER NOT NULL,
     password VARCHAR NOT NULL,
     salt VARCHAR NOT NULL
@@ -14,7 +14,7 @@ CREATE TABLE courses(
     number INTEGER NOT NULL,
     name TEXT NOT NULL,
     description TEXT,
-    prerequisites int[],
+    prerequisites TEXT[],
     credits INTEGER NOT NULL
 );
 

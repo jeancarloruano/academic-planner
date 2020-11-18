@@ -74,10 +74,10 @@ public class PersonController {
     public boolean checkPass(@PathVariable("email") String email,@PathVariable("password") String password){ return personService.checkPassword(email,password);}
 
     @GetMapping(path = "/currentCourses/{email}")
-    public ArrayList<Integer> currentCourses(@PathVariable("email") String email){ return personService.currentCourses(email);}
+    public ArrayList<String> currentCourses(@PathVariable("email") String email){ return personService.currentCourses(email);}
 
     @GetMapping(path = "/neededCourses/{id}")
-    public ArrayList<Integer> neededCourses(@PathVariable("id") int id){return personService.neededCourses(id);}
+    public ArrayList<String> neededCourses(@PathVariable("id") int id){return personService.neededCourses(id);}
 
     @GetMapping(path = "/schoolPlan/{id}")
     public Integer schoolPlan(@PathVariable("id") int id){return  personService.schoolPlan(id);}

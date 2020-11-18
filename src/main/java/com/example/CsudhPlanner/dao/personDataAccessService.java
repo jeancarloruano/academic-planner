@@ -47,8 +47,8 @@ public class personDataAccessService implements personDao {
             String FirstName = resultSet.getString("FirstName");
             String LastName = resultSet.getString("LastName");
             String email = resultSet.getString("email");
-            ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
-            ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
+            ArrayList<String> test = createArrayList(resultSet.getArray("completedCourses"));
+            ArrayList<String> current = createArrayList(resultSet.getArray("currentCourses"));
             Integer schoolPlan = resultSet.getInt("schoolPlan");
             String password = resultSet.getString("password");
             String salt = resultSet.getString("salt");
@@ -65,20 +65,20 @@ public class personDataAccessService implements personDao {
         });
     }
 
-    private java.sql.Array createSqlArray(ArrayList<Integer> courses){
+    private java.sql.Array createSqlArray(ArrayList<String> courses){
         java.sql.Array intArray = null;
         try{
-            intArray = Objects.requireNonNull(jdbcTemplate.getDataSource()).getConnection().createArrayOf("integer", courses.toArray());
+            intArray = Objects.requireNonNull(jdbcTemplate.getDataSource()).getConnection().createArrayOf("TEXT", courses.toArray());
         } catch (SQLException ignore){
         }
         return intArray;
     }
 
-    private ArrayList<Integer> createArrayList(Array input){
-        ArrayList<Integer> output = new ArrayList<>();
+    private ArrayList<String> createArrayList(Array input){
+        ArrayList<String> output = new ArrayList<>();
 
         try {
-            Integer[] test = (Integer[]) input.getArray();
+            String[] test = (String[]) input.getArray();
             output.addAll(Arrays.asList(test));
 
         } catch (SQLException throwables) {
@@ -98,8 +98,8 @@ public class personDataAccessService implements personDao {
                     String FirstName = resultSet.getString("FirstName");
                     String LastName = resultSet.getString("LastName");
                     String email = resultSet.getString("email");
-                    ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
-                    ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
+                    ArrayList<String> test = createArrayList(resultSet.getArray("completedCourses"));
+                    ArrayList<String> current = createArrayList(resultSet.getArray("currentCourses"));
                     Integer schoolPlan = resultSet.getInt("schoolPlan");
                     String password = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
@@ -129,8 +129,8 @@ public class personDataAccessService implements personDao {
                     String FirstName = resultSet.getString("FirstName");
                     String LastName = resultSet.getString("LastName");
                     String emails = resultSet.getString("email");
-                    ArrayList<Integer> test = createArrayList(resultSet.getArray("completedCourses"));
-                    ArrayList<Integer> current = createArrayList(resultSet.getArray("currentCourses"));
+                    ArrayList<String> test = createArrayList(resultSet.getArray("completedCourses"));
+                    ArrayList<String> current = createArrayList(resultSet.getArray("currentCourses"));
                     Integer schoolPlan = resultSet.getInt("schoolPlan");
                     String password = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
@@ -283,27 +283,27 @@ public class personDataAccessService implements personDao {
     }
 
     @Override
-    public ArrayList<Integer> currentCourses(String email){
+    public ArrayList<String> currentCourses(String email){
         Optional<Person> temp = selectPersonByEmail(email);
         Person temp2 = temp.get();
         return temp2.getCurrentCourses();
     }
 
     @Override
-    public ArrayList<Integer> neededCourses(int id){
+    public ArrayList<String> neededCourses(int id){
         Optional<Person> temp = selectPersonById(id);
         Person person = temp.get();
 
         List<Course> courses = selectAllCourses();
 
-        ArrayList<Integer> tempList = new ArrayList<>();
+        ArrayList<String> tempList = new ArrayList<>();
 
-        courses.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
-        courses.removeIf(c -> person.getCurrentCourses().contains(c.getNumber()));
+        courses.removeIf(c -> person.getCompletedCourses().contains(c.getKeyNumber()));
+        courses.removeIf(c -> person.getCurrentCourses().contains(c.getKeyNumber()));
 
 
         for(Course c : courses){
-            tempList.add(c.getNumber());
+            tempList.add(c.getKeyNumber());
         }
 
         return tempList;
@@ -341,7 +341,7 @@ public class personDataAccessService implements personDao {
             int number = resultSet.getInt("number");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
-            ArrayList<Integer> test = createArrayList(resultSet.getArray("prerequisites"));
+            ArrayList<String> test = createArrayList(resultSet.getArray("prerequisites"));
             int credits = resultSet.getInt("credits");
             return new Course(
                     keyNumber,
@@ -364,7 +364,7 @@ public class personDataAccessService implements personDao {
                     int courseID = resultSet.getInt("number");
                     String name = resultSet.getString("name");
                     String description = resultSet.getString("description");
-                    ArrayList<Integer> prerequisites = createArrayList(resultSet.getArray("prerequisites"));
+                    ArrayList<String> prerequisites = createArrayList(resultSet.getArray("prerequisites"));
                     int credits = resultSet.getInt("credits");
                     return new Course(
                             keyNumber2,
