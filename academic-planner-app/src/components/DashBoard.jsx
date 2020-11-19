@@ -10,6 +10,7 @@ import Resources from './Resources';
 import Contact from './Contact';
 import Settings from './Settings';
 import CourseDetails from './CourseDetails';
+import ChangePlan from './ChangePlan';
 
 
 class DashBoard extends Component {
@@ -29,6 +30,9 @@ class DashBoard extends Component {
         };
     }
 
+    changePlan = () => {
+        return <Link to="/change-plan"><button>Change Plan</button></Link>;
+    }
 
 
     componentDidMount() {
@@ -41,7 +45,7 @@ class DashBoard extends Component {
         let gradPlan = '';
         const data = await fetch(url);
         const items = await data.json();
-        //console.log(items);
+        console.log(items);
 
         switch (items.schoolPlan) {
             case 0:
@@ -115,7 +119,8 @@ class DashBoard extends Component {
                             completedCourses={this.state.completedCourses}
                             graduationPlan={this.state.graduationPlan}
                             currentCourses={this.state.currentCourses}
-                            enrollmentStatus={this.state.enrollmentStatus} />}
+                            enrollmentStatus={this.state.enrollmentStatus}
+                            enrollmentPlan={this.changePlan} />}
                         />
                         <Route path="/myreport" component={() => <MyReport
                             id={this.state.id}
@@ -132,6 +137,10 @@ class DashBoard extends Component {
                         <Route path="/contact" component={Contact} />
                         <Route path="/settings" component={Settings} />
                         <Route path="/courses/:cd" component={CourseDetails} />
+                        <Route path="/change-plan" exact component={() => <ChangePlan
+                            id={this.state.id}
+                            graduationPlan={this.state.graduationPlan} />}
+                        />
                     </Switch>
                 </Router>
             </section >

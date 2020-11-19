@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { Link } from 'react-router-dom';
 
 class MyReport extends Component {
     constructor(props) {
@@ -68,7 +69,9 @@ class MyReport extends Component {
         let listCurrentCourses;
 
         listCurrentCourses = this.state.currentCourses.map((currentCourse) =>
-            <li key={currentCourse}>{currentCourse}</li>
+            <li key={currentCourse}>
+                <Link to={`/courses/${currentCourse}`}>{currentCourse}</Link>
+            </li>
         );
 
         return listCurrentCourses;
@@ -78,7 +81,9 @@ class MyReport extends Component {
         let listCompletedCourses;
 
         listCompletedCourses = this.state.completedCourses.map((completedCourse) =>
-            <li key={completedCourse}>{completedCourse}</li>
+            <li key={completedCourse}>
+                <Link to={`/courses/${completedCourse}`}>{completedCourse}</Link>
+            </li>
         );
 
         return listCompletedCourses;
@@ -88,7 +93,9 @@ class MyReport extends Component {
         let listRemainingCourses;
 
         listRemainingCourses = this.state.pendingCourses.map((pendingCourse) =>
-            <li key={pendingCourse}>{pendingCourse}</li>
+            <li key={pendingCourse}>
+                <Link to={`/courses/${pendingCourse}`}>{pendingCourse}</Link>
+            </li>
         );
 
         return listRemainingCourses;

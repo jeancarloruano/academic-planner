@@ -3,6 +3,7 @@ import { Component } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ChangePlan from './ChangePlan';
 
 class Home extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Home extends Component {
             enrollmentStatus: this.props.enrollmentStatus
         };
     }
+
 
     getTerm = () => {
         let m = new Date();
@@ -59,6 +61,7 @@ class Home extends Component {
         return listCourses;
     }
 
+
     render() {
         return (
             <div>
@@ -67,8 +70,8 @@ class Home extends Component {
                 </div>
                 <div className="gradPlan">
                     <h3>Your Current Academic Plan:</h3>
-                    {`${this.state.graduationPlan}`} Enrollment <br />
-                    <button>Change Plan</button>
+                    {`${this.state.graduationPlan}`} Enrollment Plan <br />
+                    {this.props.enrollmentPlan()}
                 </div>
                 <div className="courseProgress">
                     <h3>Degree Completion:</h3>

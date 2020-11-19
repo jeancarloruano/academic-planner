@@ -35,6 +35,28 @@ class CourseDetails extends Component {
             courseCredits: items.Credits,
             coursePrerequisites: items.Prerequisites
         })
+        console.log(this.state);
+    }
+
+    listPrerequisites = () => {
+        let listPrereq;
+
+        listPrereq = this.state.coursePrerequisites.map((coursePrerequisite) =>
+            <li key={coursePrerequisite}>
+                {coursePrerequisite}
+            </li>
+        );
+
+        return listPrereq;
+    }
+
+    hasPrerequistes = () => {
+        if (this.state.coursePrerequisites.length > 0) {
+            return this.listPrerequisites();
+        }
+        else {
+            return "None"
+        }
     }
 
     render() {
@@ -51,7 +73,7 @@ class CourseDetails extends Component {
                     <p>{this.state.courseDescription}</p>
                 </div>
                 <div>Prerequisites:
-                    <p>{this.state.coursePrerequisites}</p>
+                    <p>{this.hasPrerequistes()}</p>
                 </div>
                 <div>Credits:
                     <p>{this.state.courseCredits}</p>

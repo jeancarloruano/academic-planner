@@ -54,7 +54,7 @@ class Login extends Component {
             }
 
             else {
-                console.log("Incorrect email or password...")
+                console.log("Incorrect email or password...");
             }
 
         } else {
@@ -96,22 +96,21 @@ class Login extends Component {
     }
 
     userIsActive = () => {
-        console.log(this.state.emailPassValid);
-        console.log(this.state.email);
+        //console.log(this.state.emailPassValid);
+        //console.log(this.state.email);
         this.props.callBack(this.state.emailPassValid);
         this.props.getEmail(this.state.email);
     }
 
-    checkEmailPass = () => {
+    checkEmailPass = async () => {
         let url = 'http://localhost:8080/api/v1/person/checkPass/' + this.state.email + '/' + this.state.password + '/';
         //console.log(url);
-        fetch(url)
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    emailPassValid: json
-                })
-            })
+        const data = await fetch(url);
+        const items = await data.json();
+        //console.log(items);
+        this.setState({
+            emailPassValid: items
+        });
         //console.log(this.state.emailPassValid);
     }
 
@@ -143,7 +142,7 @@ class Login extends Component {
                         <p className="errorMsg">{this.state.formError.passwordError}</p>
 
                         <div className="btnContainer">
-                            <button onClick={this.handleLogin}>Sign In</button>
+                            <button>Sign In</button>
                             <p>Don't have an account? <span onClick={this.setFalse}>Sign up</span></p>
                         </div>
                     </div>
