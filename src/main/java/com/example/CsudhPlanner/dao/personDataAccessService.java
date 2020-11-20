@@ -164,8 +164,6 @@ public class personDataAccessService implements personDao {
                 "' WHERE id = " + id;
 
         jdbcTemplate.update(sql);
-
-
         return 0;
     }
 
@@ -178,8 +176,8 @@ public class personDataAccessService implements personDao {
         Optional<Person> tempPerson = selectPersonByEmail(email);
         Person person = tempPerson.get();
 
-        allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getNumber()));
-        allCourses2.removeIf(c -> person.getCurrentCourses().contains(c.getNumber()));
+        allCourses2.removeIf(c -> person.getCompletedCourses().contains(c.getKeyNumber()));
+        allCourses2.removeIf(c -> person.getCurrentCourses().contains(c.getKeyNumber()));
 
 
 
