@@ -20,44 +20,75 @@ class AddStudentInfo extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.props.handleContinue}>
                 <section className="addInfo" >
                     <div className="formContainer">
-                        <p>We noticed you've never been here before. Please fill out the following to continue.</p>
+                        <p>Enter Your Student Information</p>
 
                         <label htmlFor="firstName">First Name</label>
                         <input
                             type="text"
                             name="firstName"
+                            autoFocus
                             required
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         />
 
-                        <p className="errorMsg">{this.state.formError.inputError}</p>
+                        <p className="errorMsg">{this.props.formError.nameError}</p>
 
                         <label htmlFor="lastName">Last Name</label>
                         <input
                             type="text"
                             name="lastName"
                             required
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         />
 
-                        <p className="errorMsg">{this.state.formError.inputError}</p>
+                        <p className="errorMsg">{this.props.formError.nameError}</p>
 
                         <label htmlFor="id">Student ID</label>
                         <input
                             type="text"
-                            name="id"
-                            autoFocus
+                            name="studentID"
                             required
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         />
 
-                        <p className="errorMsg">{this.state.formError.inputError}</p>
+                        <p className="errorMsg">{this.props.formError.idError}</p>
+
+                        <label htmlFor="email">Student Email</label>
+                        <input
+                            type="text"
+                            name="email"
+                            required
+                            onChange={this.props.handleChange}
+                        />
+
+                        <p className="errorMsg">{this.props.formError.emailError}</p>
+
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            onChange={this.props.handleChange}
+                        />
+
+                        <p className="errorMsg">{this.props.formError.passwordError}</p>
+
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            required
+                            onChange={this.props.handleChange}
+                        />
+
+                        <p className="errorMsg">{this.props.formError.confirmPassError}</p>
 
                         <div className="btnContainer">
-                            <button onClick={this.handleLogin}>Continue</button>
+                            <button type="submit">Continue</button>
+                            <p>Already have an account? <span onClick={this.props.accountStatus}>Sign in</span></p>
                         </div>
 
                     </div>

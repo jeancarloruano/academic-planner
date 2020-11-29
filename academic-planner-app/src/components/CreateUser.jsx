@@ -1,20 +1,5 @@
 import React, { Component } from 'react';
 
-const RandomString = () => {
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()[]{}_=+-/?~';
-    let hashVal = '';
-    let i;
-
-    for (i = 0; i < 11; i++) {
-        hashVal += characters[Math.floor(Math.random() * (characters.length))];
-    }
-
-    console.log('Hash Salt Value: ' + hashVal);                  //for debugging, delete or comment out for security
-    return hashVal;
-}
-
-let myString = RandomString();
-
 class CreateUser extends Component {
     constructor(props) {
         super(props)
@@ -30,44 +15,35 @@ class CreateUser extends Component {
         };
     }
 
-    SetProperties() {
-        this.setState(
-            {
-                id: '5673765',
-                firstName: 'Bob',
-                lastName: 'Saget',
-                email: 'this.props.email',
-                completedCourses: [115, 492, 301, 311],
-                password: 'this.props.password',
-                salt: myString
-            }, () => {
-                console.log('Callback Value: ',                         //for debugging only, delete or comment out for security
-                    'ID: ' + this.state.id,
-                    'First Name: ' + this.state.firstName,
-                    'Last Name: ' + this.state.lastName,
-                    'Email: ' + this.state.email,
-                    'Completed Courses: ' + this.state.completedCourses,
-                    'Password: ' + this.state.password,
-                    'Hash Salt Value: ' + this.state.salt
-                );
-            }
-        );
+    randomString = () => {
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()[]{}_=+-/?~';
+        let hashVal = '';
+        let i;
+    
+        for (i = 0; i < 11; i++) {
+            hashVal += characters[Math.floor(Math.random() * (characters.length))];
+        }
+    
+        return hashVal;
     }
 
 
-    componentDidMount() {
-        this.SetProperties();
+    createAccount = () => {
+        let myString = this.randomString();
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id: this.state.id,
-                FirstName: this.state.firstName,
-                LastName: this.state.lastName,
                 email: this.state.email,
+                firstname: this.state.firstName,
+                lastname: this.state.lastName,
                 completedCourses: this.state.completedCourses,
+                currentCourses: this.state.currentCourses,
+                schoolPlan: this.state.schoolPlan,
                 password: this.state.password,
-                salt: this.state.salt
+                salt: myString
             })
         };
         fetch('http://localhost:8080/api/v1/person/', requestOptions)
@@ -77,9 +53,6 @@ class CreateUser extends Component {
     render() {
         return (
             <div>
-                Hello World! <br />
-                {this.props.email}
-                {this.props.password}
             </div>
         );
     }

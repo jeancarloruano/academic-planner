@@ -301,12 +301,12 @@ ul {
 .userMenu ul {
   margin-top: 50px;
   display: none;
-  float: left;
 }
 
 .userAvatar:hover .userMenu ul {
   margin-top: 50px;
-  display: none;
+  float: left;
+  display: block;
   position: absolute;
 }
 

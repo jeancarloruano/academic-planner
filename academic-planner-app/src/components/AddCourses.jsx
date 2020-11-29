@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
 
-
 class AddCourses extends Component {
     state = {
-        courses: []
+        courseList: [],
+        keyNumList: [],
+        courseIsCompleted: false,
+        completedCourses: []
     };
 
-    componentDidMount() {
-        fetch(`http://localhost:8080/api/v1/course`)
-            .then(results => results.json())
-            .then(json => {
-                this.setState({
-                    courses: json
-                })
-            });
-
-    }
 
     renderTableData() {
-        return this.state.courses.map((course, index) => {
-            const { number, name, description, prerequisites } = course //destructuring
+        return this.props.courseList.map((course, index) => {
+            const { KeyNumber, Name, Description } = course //destructuring
+            const { courseIsCompleted } = this.state;
             return (
-                <tr className="courses" key={number}>
-                    <input className="checkBox" type="checkbox"></input>
-                    <td>{number}</td>
-                    <td>{name}</td>
+                <tr className="courses" key={index}>
+                    <input className="checkBox" type="checkbox" onChange={this.onChange} id={KeyNumber} value={KeyNumber}></input>
+                    <td>{KeyNumber}</td>
+                    <td>{Name}</td>
+                    <td>{Description}</td>
                 </tr>
             )
         })
@@ -33,16 +27,16 @@ class AddCourses extends Component {
     render() {
         return (
             <section className="addCourses">
+                {console.log(this.props)}
                 <h1 id='title'>Course History</h1>
-                <p>Almost done! We just need a little more information about your course history. Please select all of the courses
-                you've currently completed.
+                <p>Great! Now lets add all of the courses that you've successfully completed (including any courses you are currently taking).
                 </p>
                 <table className="courseList" id='courses'>
                     <tbody>
                         {this.renderTableData()}
                     </tbody>
                 </table>
-                <form className="buttonForm">
+                <form className="buttonForm" onSubmit={this.props.saveAndContinue}>
                     <div className="buttonDiv">
                         <ul>
                             <li>
@@ -52,7 +46,7 @@ class AddCourses extends Component {
                                 <button type="button" className="aCButton">Select None</button>
                             </li>
                             <li>
-                                <button type="button" className="aCButton">Save and Continue</button>
+                                <button type="submit" className="aCButton">Save and Continue</button>
                             </li>
                         </ul>
                     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, Component } from 'react';
+import { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../img/CSUDH-RGB-Logo-Burgundy-Background.png';
@@ -103,7 +103,7 @@ class DashBoard extends Component {
                                     <div className="userMenu">
                                         <ul>
                                             <li><Link to="/settings"><button>Settings</button></Link></li>
-                                            <li><button>Logout</button></li>
+                                            <li><button onClick={this.props.logOut}>Logout</button></li>
                                         </ul>
                                     </div>
                                 </div>
