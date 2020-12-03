@@ -26,6 +26,35 @@ button {
   cursor: pointer;
 }
 
+.smallButtonContainer {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  background: #860038;
+}
+
+.smallButton {
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  width: 100%;
+  padding: 15px 0;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background: #860038;
+  cursor: pointer;
+}
+
+.smallButton:hover{
+  background: #0000002a;
+}
+
 button:hover {
   background: #0000002a;
 }
@@ -95,6 +124,7 @@ ul {
   padding: 24px 0;
 }
 
+
 .login .loginContainer .btnContainer p {
   margin: 14px 0 0 0;
   text-align: right;
@@ -124,7 +154,7 @@ ul {
 .addInfo {
   width: 100%;
   min-height: 100vh;
-  padding: 0 20px;
+  padding: 10px 20px;
   background: #e9e9e9;
   display: flex;
 }
@@ -140,6 +170,12 @@ ul {
   justify-content: center;
   background: #860038;
   box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+}
+
+.addInfo .addInfoHeader {
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
 }
 
 .addInfo .formContainer p {
@@ -199,9 +235,17 @@ ul {
 
 /* styling for the AddCourses component */
 
+.description {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .addCourses {
   width: 100%;
+  height: 100%;
+  min-height: 100vh;
   background: #e9e9e9;
+  padding: 10px;
   
 }
 
@@ -219,13 +263,41 @@ ul {
 }
 
 .courses .checkBox {
-  margin: 10px;
+  vertical-align: middle;
+}
+
+.courseNum {
+  white-space: nowrap;
+  margin-right: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.courseName {
+  white-space: nowrap;
+  margin-right: 2px;
+  padding-right: 10px;
+}
+
+.courseDescription {
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  min-height: 100px;
 }
 
 .addCourses .nav {
   max-width: 520px;
   display: flex;
   justify-content: center;
+}
+
+/* syling for AccountCreated */
+
+.accountCreated {
+  width: 100%;
+  height: 100%;
+  background: #e9e9e9;
+  padding: 10px;
 }
 
 /* styling for the DashBoard component */
@@ -385,3 +457,4 @@ ul {
 .myReport .listedCourses ul {
   list-style-type: none;
 }
+

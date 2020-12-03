@@ -79,7 +79,8 @@ class App extends Component {
     }
     else {
       this.setState({
-        hasAccount: true
+        hasAccount: true,
+        createUserStatus: 'AddStudentInfo'
       });
     }
   }

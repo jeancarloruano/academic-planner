@@ -23,7 +23,7 @@ class AddStudentInfo extends Component {
             <form onSubmit={this.props.handleContinue}>
                 <section className="addInfo" >
                     <div className="formContainer">
-                        <p>Enter Your Student Information</p>
+                        <h2 className="addInfoHeader">Enter Your Student Information</h2>
 
                         <label htmlFor="firstName">First Name</label>
                         <input

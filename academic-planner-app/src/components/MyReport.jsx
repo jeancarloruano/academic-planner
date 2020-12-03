@@ -47,21 +47,25 @@ class MyReport extends Component {
                 break;
         }
 
-        //console.log(path);
-
-        url = ("http://localhost:8080/api/v1/person/" + this.state.id + "/" + path);
-        //console.log(url);
+        url = ("http://localhost:8080/api/v1/person/" + path + "/" + this.props.email + "/");
 
         const data = await fetch(url);
         const recCourses = await data.json();
-        console.log(recCourses);
-        console.log(typeof recCourses);
 
-        let toArrray = Object.keys(recCourses);
+
+        let objLength = Object.keys(recCourses).length;
+        let myArr = [];
+        for (var i = 0; i < objLength; i++) {
+            let num = i + 1;
+            myArr.push("Semester " + num + ":");
+            for (var j = 0; j < recCourses[i].length; j++) {
+                myArr.push(recCourses[i][j].KeyNumber);
+            }
+        }
 
         this.setState({
-            recommendedCourses: toArrray
-        });
+            recommendedCourses: myArr
+        }, () => console.log(this.state.recommendedCourses));
 
     }
 
@@ -101,6 +105,23 @@ class MyReport extends Component {
         return listRemainingCourses;
     }
 
+    listRecommendedCourses = () => {
+        let listRecommendedCourses;
+
+        return this.state.recommendedCourses.map((recommendedCourse) => {
+            if (recommendedCourse.includes("Semester")) {
+                return (<p>{recommendedCourse}</p>)
+            }
+            else {
+                return (<li key={recommendedCourse} >
+                    <Link to={`/courses/${recommendedCourse}`}>{recommendedCourse}</Link>
+                </li >)
+            }
+        });
+
+        //return listRecommendedCourses;
+    }
+
     render() {
         return (
             <div className="myReport">
@@ -127,9 +148,11 @@ class MyReport extends Component {
                     <p>{this.state.enrollmentStatus}</p>
                 </div>
                 <div>
-                    Plan: {`${this.state.graduationPlan}`} <br />
-                    Your Course Guideline:
-                        <p>{this.state.recommendedCourses}</p>
+                    Enrollment Plan:
+                    <p>{`${this.state.graduationPlan}`}</p>
+                </div>
+                <div className="listedCourses">Your Course Guideline:
+                        <ul>{this.listRecommendedCourses()}</ul>
                 </div>
             </div>
         );

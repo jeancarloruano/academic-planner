@@ -5,9 +5,11 @@ class AccountCreated extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Your account was successfully created!</h2>
-                <button onClick={this.props.accountStatus}>Return to login</button>
+            <div className="accountCreated">
+                <h1>Your account was successfully created!</h1>
+                <div className="smallButtonContainer">
+                    <button className="smallButton" onClick={this.props.accountStatus}>Return to login</button>
+                </div>
             </div>
         )
 

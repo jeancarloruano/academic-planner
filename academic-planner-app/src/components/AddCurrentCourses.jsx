@@ -14,7 +14,7 @@ class AddCourses extends Component {
             return (
                 <tr className="courses" key={completedCourse}>
                     <input className="checkBox" type="checkbox" onChange={this.onChange} id={completedCourse} value={completedCourse}></input>
-                    <td>{completedCourse}</td>
+                    <td className="courseNum">{completedCourse}</td>
                 </tr>
             )
         })
@@ -23,8 +23,8 @@ class AddCourses extends Component {
     render() {
         return (
             <section className="addCourses">
-                <h1 id='title'>Course History</h1>
-                <p>Almost done! We just need a little more information about your course history. Select any of the courses that you are currently taking (if applicable).
+                <h1 id='title'>Current Courses</h1>
+                <p>Almost done! We just need a little more information about your course history. From your previous selection, check any of the courses that you are currently taking (if applicable).
                 </p>
                 <table className="courseList" id='courses'>
                     <tbody>
@@ -32,12 +32,8 @@ class AddCourses extends Component {
                     </tbody>
                 </table>
                 <form className="buttonForm" onSubmit={this.props.handleCreateAccount}>
-                    <div className="buttonDiv">
-                        <ul>
-                            <li>
-                                <button type="submit" className="aCButton">Create Account</button>
-                            </li>
-                        </ul>
+                    <div className="smallButtonContainer">
+                        <button type="submit" className="smallButton">Create Account</button>
                     </div>
                 </form>
             </section>

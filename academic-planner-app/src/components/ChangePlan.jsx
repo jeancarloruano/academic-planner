@@ -81,8 +81,8 @@ class ChangePlan extends Component {
                                 <input type="radio" value="Part-Time" checked={graduationPlan === "Part-Time"} onChange={this.onChange} />
                             </label>
                         </div>
-                        <div className="btnContainer">
-                            <button type="button" onClick={this.handleSubmit}>Save</button>
+                        <div className="smallButtonContainer">
+                            <button type="smallButton" onClick={this.handleSubmit}>Save</button>
                         </div>
                     </section>
                 </form>

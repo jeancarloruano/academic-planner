@@ -37,7 +37,11 @@ class DashBoard extends Component {
 
     componentDidMount() {
         this.fetchUserData();
-        console.log(this.props.email);
+        //console.log(this.props.email);
+    }
+
+    componentDidUpdate() {
+        this.fetchUserData();
     }
 
     fetchUserData = async () => {

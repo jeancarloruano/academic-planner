@@ -16,9 +16,9 @@ class AddCourses extends Component {
             return (
                 <tr className="courses" key={index}>
                     <input className="checkBox" type="checkbox" onChange={this.onChange} id={KeyNumber} value={KeyNumber}></input>
-                    <td>{KeyNumber}</td>
-                    <td>{Name}</td>
-                    <td>{Description}</td>
+                    <td className="courseNum">{KeyNumber}</td>
+                    <td className="courseName">{Name}</td>
+                    <td className="courseDescription">{Description}</td>
                 </tr>
             )
         })
@@ -32,23 +32,21 @@ class AddCourses extends Component {
                 <p>Great! Now lets add all of the courses that you've successfully completed (including any courses you are currently taking).
                 </p>
                 <table className="courseList" id='courses'>
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th className="courseNum">Course Number</th>
+                            <th className="courseName">Course Name</th>
+                            <th>Course Description</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {this.renderTableData()}
                     </tbody>
                 </table>
                 <form className="buttonForm" onSubmit={this.props.saveAndContinue}>
-                    <div className="buttonDiv">
-                        <ul>
-                            <li>
-                                <button type="button" className="aCButton">Select All</button>
-                            </li>
-                            <li>
-                                <button type="button" className="aCButton">Select None</button>
-                            </li>
-                            <li>
-                                <button type="submit" className="aCButton">Save and Continue</button>
-                            </li>
-                        </ul>
+                    <div className="smallButtonContainer">
+                        <button type="submit" className="smallButton">Save and Continue</button>
                     </div>
                 </form>
             </section>
