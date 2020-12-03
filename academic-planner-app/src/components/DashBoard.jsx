@@ -40,10 +40,6 @@ class DashBoard extends Component {
         //console.log(this.props.email);
     }
 
-    componentDidUpdate() {
-        this.fetchUserData();
-    }
-
     fetchUserData = async () => {
         let url = ("http://localhost:8080/api/v1/person/email/" + this.state.email + "/");
         let gradPlan = '';
@@ -143,7 +139,14 @@ class DashBoard extends Component {
                         <Route path="/courses/:cd" component={CourseDetails} />
                         <Route path="/change-plan" exact component={() => <ChangePlan
                             id={this.state.id}
-                            graduationPlan={this.state.graduationPlan} />}
+                            email={this.state.email}
+                            firstName={this.state.firstName}
+                            lastName={this.state.lastName}
+                            completedCourses={this.state.completedCourses}
+                            currentCourses={this.state.currentCourses}
+                            password={this.props.password}
+                            salt={this.props.salt}
+                            schoolPlan={this.state.graduationPlan} />}
                         />
                     </Switch>
                 </Router>

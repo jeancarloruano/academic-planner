@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import logo from '../img/CSUDH-RGB-Logo-Burgundy-Background.png';
-import AddStudentInfo from './AddStudentInfo';
-import CreateUser from './CreateUser';
-
 
 class Login extends Component {
     constructor(props) {

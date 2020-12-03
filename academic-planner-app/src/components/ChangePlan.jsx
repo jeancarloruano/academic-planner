@@ -18,12 +18,13 @@ class ChangePlan extends Component {
         });
     }
 
-    handleSubmit = () => {
+    handleSubmit = e => {
+        e.preventDefault();
         this.setGradPlan();
     }
 
     setGradPlan = () => {
-        let url = ('http://localhost:8080/api/v1/person/' + this.state.id + '/');
+        let url = ('http://localhost:8080/api/v1/person/' + this.props.id + '/');
         let gradPlan = 0;
         console.log(url);
 
@@ -46,17 +47,28 @@ class ChangePlan extends Component {
         }
 
         console.log(gradPlan);
-
+        console.log(this.props);
+        
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                schoolPlan: gradPlan
+                id: this.props.id,
+                email: this.props.email,
+                FirstName: this.props.firstName,
+                LastName: this.props.lastName,
+                completedCourses: this.props.completedCourses,
+                currentCourses: this.props.currentCourses,
+                schoolPlan: gradPlan,
+                password: '',
+                salt: ''
             })
         };
-
-        fetch(url, requestOptions)
+        fetch('http://localhost:8080/api/v1/person/', requestOptions)
             .then(res => res.json())
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     render() {

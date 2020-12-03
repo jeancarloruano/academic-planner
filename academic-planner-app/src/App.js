@@ -3,9 +3,7 @@ import "./App.css";
 import Login from './components/Login';
 import DashBoard from './components/DashBoard';
 import AddStudentInfo from "./components/AddStudentInfo";
-import CreateUser from './components/CreateUser.jsx'
 import AddCourses from "./components/AddCourses";
-import AuthenicateUser from "./components/AuthenticateUser";
 import CreateAccount from "./components/CreateAccount";
 import AddCurrentCourses from './components/AddCurrentCourses';
 import AccountCreated from './components/AccountCreated';
@@ -356,7 +354,17 @@ class App extends Component {
       <div>
         <>
           {this.state.isLoggedIn ? (
-            <DashBoard email={this.state.email}
+            <DashBoard
+              id={this.state.id}
+              email={this.state.email}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              completedCourses={this.state.completedCourses}
+              currentCourses={this.state.currentCourses}
+              schoolPlan={this.state.schoolPlan}
+              password={this.state.password}
+              salt={this.state.salt}
+
               logOut={this.logOut}
             />
           ) : (
