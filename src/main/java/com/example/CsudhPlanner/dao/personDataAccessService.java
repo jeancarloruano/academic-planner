@@ -317,6 +317,24 @@ public class personDataAccessService implements personDao {
         return person.getSchoolPlan();
     }
 
+    @Override
+    public int passwordChange(int id, String newPass){
+        Optional<Person> temp = selectPersonById(id);
+        Person person = temp.get();
+
+        String salt = person.returnSalt();
+        String sql = "UPDATE person "+
+                     "SET password = '" + person.encrypt(newPass,person.returnSalt()) +
+                     "' WHERE id = " + id;
+
+        jdbcTemplate.update(sql);
+
+
+        return 0;
+    }
+
+
+
 
 
 

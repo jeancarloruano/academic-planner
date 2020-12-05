@@ -4,14 +4,18 @@ import com.example.CsudhPlanner.model.Course;
 import com.example.CsudhPlanner.model.Person;
 import com.example.CsudhPlanner.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/v1/person")
 @RestController
 public class PersonController {
@@ -54,6 +58,7 @@ public class PersonController {
         personService.deletePersonById(id);
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping(path = "{id}")
     public void updatePerson(@PathVariable("id") int id ,@NonNull @RequestBody Person personToUpdate){
         personService.updatePerson(id, personToUpdate);
@@ -81,6 +86,9 @@ public class PersonController {
 
     @GetMapping(path = "/schoolPlan/{id}")
     public Integer schoolPlan(@PathVariable("id") int id){return  personService.schoolPlan(id);}
+
+    @PutMapping(path = "/password/{id}")
+    public int passwordChange(@PathVariable("id")int id, String newPass){return personService.passwordChange(id,newPass);}
     
 
 }
