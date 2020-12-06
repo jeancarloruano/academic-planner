@@ -87,8 +87,9 @@ public class PersonController {
     @GetMapping(path = "/schoolPlan/{id}")
     public Integer schoolPlan(@PathVariable("id") int id){return  personService.schoolPlan(id);}
 
+    /*
     @PutMapping(path = "/password/{id}")
     public int passwordChange(@PathVariable("id")int id, String newPass){return personService.passwordChange(id,newPass);}
-    
+    */
 
 }

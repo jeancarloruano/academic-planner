@@ -265,6 +265,10 @@ public class personDataAccessService implements personDao {
         return plan1;
     }
 
+
+
+    //Verify with wrong email given
+
     @Override
     public boolean checkPassword(String email,String password){
         try{
@@ -317,7 +321,6 @@ public class personDataAccessService implements personDao {
         return person.getSchoolPlan();
     }
 
-    @Override
     public int passwordChange(int id, String newPass){
         Optional<Person> temp = selectPersonById(id);
         Person person = temp.get();
