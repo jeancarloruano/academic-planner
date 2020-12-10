@@ -1,6 +1,5 @@
 import React from 'react';
 import { Component } from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 
 class Settings extends Component {
     constructor(props) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Component } from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import { Link } from 'react-router-dom';
 
 class MyReport extends Component {
@@ -106,8 +105,6 @@ class MyReport extends Component {
     }
 
     listRecommendedCourses = () => {
-        let listRecommendedCourses;
-
         return this.state.recommendedCourses.map((recommendedCourse) => {
             if (recommendedCourse.includes("Semester")) {
                 return (<p>{recommendedCourse}</p>)
@@ -118,8 +115,6 @@ class MyReport extends Component {
                 </li >)
             }
         });
-
-        //return listRecommendedCourses;
     }
 
     render() {

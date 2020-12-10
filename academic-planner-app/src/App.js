@@ -84,6 +84,7 @@ class App extends Component {
   }
 
   logOut = () => {
+    localStorage.setItem('isLoggedIn', 'false');
     this.setState({
       isLoggedIn: false
     })
@@ -94,12 +95,6 @@ class App extends Component {
     e.preventDefault();
 
     if (formValid(this.state.formError)) {
-      /*console.log(`
-        --SUBMITTING--
-        Email: ${this.state.email}
-        Password: ${this.state.password}
-        `);*/
-
       this.checkEmailPass();
 
     } else {
@@ -170,11 +165,14 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchCourseData();
+    var myBool = (localStorage.getItem('isLoggedIn') === 'true');
+    this.setState({
+      isLoggedIn: myBool
+    })
   }
 
   checkEmailPass = async () => {
     let url = 'http://localhost:8080/api/v1/person/checkPass/' + this.state.email + '/' + this.state.password + '/';
-    //console.log(url);
     const data = await fetch(url);
     const items = await data.json();
     console.log('Incoming message: ' + items);
@@ -183,6 +181,7 @@ class App extends Component {
     });
 
     if (items === true) {
+      localStorage.setItem('isLoggedIn', 'true');
       this.setState({
         isLoggedIn: true
       });
@@ -200,7 +199,6 @@ class App extends Component {
   }
 
   // CreateAccount component functions
-
   handleContinue = e => {
     e.preventDefault();
 
@@ -211,19 +209,6 @@ class App extends Component {
   };
 
   pageHandler = () => {
-    /*if (this.state.studentInfoAdded === false) {
-      return <AddStudentInfo
-        accountStatus={this.accountStatus}
-        handleContinue={this.handleContinue}
-      />;
-    }
-
-    else {
-      return <AddCourses
-        handleAddCourses={this.handleAddCourses}
-      />;
-    }*/
-
     switch (this.state.createUserStatus) {
       case 'AddStudentInfo': return <AddStudentInfo
         accountStatus={this.accountStatus}
@@ -265,7 +250,6 @@ class App extends Component {
     const arr = [];
 
     for (var i = 0; i < items.length; i++) {
-      //let newArr = items[i].KeyNumber.map((course, index) => { });
       arr.push(items[i].KeyNumber);
     }
     this.setState({

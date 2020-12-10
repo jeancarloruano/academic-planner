@@ -12,7 +12,6 @@ class AddCourses extends Component {
     renderTableData() {
         return this.props.courseList.map((course, index) => {
             const { KeyNumber, Name, Description } = course //destructuring
-            const { courseIsCompleted } = this.state;
             return (
                 <tr className="courses" key={index}>
                     <input className="checkBox" type="checkbox" onChange={this.onChange} id={KeyNumber} value={KeyNumber}></input>

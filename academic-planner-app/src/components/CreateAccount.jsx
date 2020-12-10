@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import AddCourses from './AddCourses';
-import AddStudentInfo from './AddStudentInfo';
 
 class CreateAccount extends Component {
     constructor(props) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, Component } from 'react';
+import { Component } from 'react';
 
 
 class CourseDetails extends Component {
