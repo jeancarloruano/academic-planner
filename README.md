@@ -1,5 +1,4 @@
 # CSUDH Academic Planner
 My senior project for Cal State Domniguez Hills.
-This academic planner is designed to assist students at keeping track of their course history during their time in school.
-The application was implemented using ReactJS for the front-end and Java Spring Boot for the back-end.
+Academic planner designed to help students keep track of their course history throughout the school year. The application features a ReactJS front-end and a Java Spring Boot back-end.
 Developed by Jeancarlo Ruano and Anthony Bruno.
